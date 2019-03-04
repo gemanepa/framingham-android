@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,5 +50,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void genderSwitch(View view) {
+        Button genderButton = this.<Button>findViewById(R.id.genderinput);
+        String genderButtonCurrentState = genderButton.getText().toString();
+        Log.d("Antes de Condicional", genderButtonCurrentState);
+        if(genderButtonCurrentState.equals("Hombre")) {
+            genderButton.setText("Mujer");
+            Log.d("Primer Condicional", genderButtonCurrentState);
+        }
+        else if(genderButtonCurrentState.equals("Mujer")) {
+            genderButton.setText("Hombre");
+            Log.d("Segunda Condicional", genderButtonCurrentState);
+        }
+    }
+
+    public void smokingSwitch(View view) {
+        Button genderButton = this.<Button>findViewById(R.id.genderinput);
+        String genderButtonCurrentState = genderButton.getText().toString();
+        Log.d("Antes de Condicional", genderButtonCurrentState);
+        if(genderButtonCurrentState.equals("Hombre")) {
+            genderButton.setText("Mujer");
+            Log.d("Primer Condicional", genderButtonCurrentState);
+        }
+        else if(genderButtonCurrentState.equals("Mujer")) {
+            genderButton.setText("Hombre");
+            Log.d("Segunda Condicional", genderButtonCurrentState);
+        }
     }
 }
