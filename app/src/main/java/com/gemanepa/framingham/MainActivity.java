@@ -55,28 +55,42 @@ public class MainActivity extends AppCompatActivity {
     public void genderSwitch(View view) {
         Button genderButton = this.<Button>findViewById(R.id.genderinput);
         String genderButtonCurrentState = genderButton.getText().toString();
-        Log.d("Antes de Condicional", genderButtonCurrentState);
+        //Log.d("Genre Before Conditional", genderButtonCurrentState);
         if(genderButtonCurrentState.equals("Hombre")) {
             genderButton.setText("Mujer");
-            Log.d("Primer Condicional", genderButtonCurrentState);
+            // Log.d("Genre First Conditional", genderButtonCurrentState);
         }
         else if(genderButtonCurrentState.equals("Mujer")) {
             genderButton.setText("Hombre");
-            Log.d("Segunda Condicional", genderButtonCurrentState);
+            // Log.d("Genre Second Conditional", genderButtonCurrentState);
         }
     }
 
     public void smokingSwitch(View view) {
-        Button genderButton = this.<Button>findViewById(R.id.genderinput);
-        String genderButtonCurrentState = genderButton.getText().toString();
-        Log.d("Antes de Condicional", genderButtonCurrentState);
-        if(genderButtonCurrentState.equals("Hombre")) {
-            genderButton.setText("Mujer");
-            Log.d("Primer Condicional", genderButtonCurrentState);
+        Button smokerButton = this.<Button>findViewById(R.id.smokerinput);
+        String smokerButtonCurrentState = smokerButton.getText().toString();
+        //Log.d("Smoking PreConditional", genderButtonCurrentState);
+        if(smokerButtonCurrentState.equals("No")) {
+            smokerButton.setText("Si");
+            //Log.d("Smoking 1st Conditional", genderButtonCurrentState);
         }
-        else if(genderButtonCurrentState.equals("Mujer")) {
-            genderButton.setText("Hombre");
-            Log.d("Segunda Condicional", genderButtonCurrentState);
+        else if(smokerButtonCurrentState.equals("Si")) {
+            smokerButton.setText("No");
+            //Log.d("Smoking 2nd Conditional", genderButtonCurrentState);
+        }
+    }
+
+    public void treatmentSwitch(View view) {
+        Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
+        String treatmentButtonCurrentState = treatmentButton.getText().toString();
+        Log.d("Treatment PreCond", treatmentButtonCurrentState);
+        if(treatmentButtonCurrentState.equals("No")) {
+            treatmentButton.setText("Si");
+            Log.d("Treatment 1st Cond", treatmentButtonCurrentState);
+        }
+        else if(treatmentButtonCurrentState.equals("Si")) {
+            treatmentButton.setText("No");
+            Log.d("Treatment 2nd Cond", treatmentButtonCurrentState);
         }
     }
 }

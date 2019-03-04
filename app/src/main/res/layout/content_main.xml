@@ -16,20 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-<!--    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="Cardiovascular Framingham Score"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:textColor="#4689C8"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
 
             <TextView
                 android:id="@+id/gendertext"
@@ -268,6 +254,7 @@
         android:layout_marginRight="8dp"
         android:text="No"
         android:textSize="12sp"
+        android:onClick="treatmentSwitch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
