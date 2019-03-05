@@ -83,14 +83,14 @@ public class MainActivity extends AppCompatActivity {
     public void treatmentSwitch(View view) {
         Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
         String treatmentButtonCurrentState = treatmentButton.getText().toString();
-        Log.d("Treatment PreCond", treatmentButtonCurrentState);
+        //Log.d("Treatment PreCond", treatmentButtonCurrentState);
         if(treatmentButtonCurrentState.equals("No")) {
             treatmentButton.setText("Si");
-            Log.d("Treatment 1st Cond", treatmentButtonCurrentState);
+            //Log.d("Treatment 1st Cond", treatmentButtonCurrentState);
         }
         else if(treatmentButtonCurrentState.equals("Si")) {
             treatmentButton.setText("No");
-            Log.d("Treatment 2nd Cond", treatmentButtonCurrentState);
+            //Log.d("Treatment 2nd Cond", treatmentButtonCurrentState);
         }
     }
 }
