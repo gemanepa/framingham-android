@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.util.Log;
+import java.util.function.Consumer;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,8 +35,21 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Button genderButton = findViewById(R.id.genderinput);
+                String gender = genderButton.getText().toString();
+
+                int agePoints = calculateAgePoints(gender);
+                int hdlPoints = calculateHDLPoints(gender);
+                int dlPoints = calculateTotalDLPoints(gender);
+                int taPoints = calculateTAPoints(gender);
+
+                int Score = agePoints + hdlPoints + dlPoints + taPoints;
+                String ScoreString = Integer.toString(Score);
+                Log.d("Score:", ScoreString);
+
+                Snackbar.make(view,"Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
 
@@ -128,4 +142,368 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // AGE POINTS CALCULATION
+    public int calculateAgePoints(String gender) {
+        Button ageSpinner = this.<Button>findViewById(R.id.ageinput);
+        String ageRangeSelected = ageSpinner.getText().toString();
+
+        int agePoints = 0;
+        if(gender.equals("Hombre")) {
+            agePoints = calculateMenAgePoints(ageRangeSelected);
+        }
+
+        else if(gender.equals("Mujer")) {
+            agePoints = calculateWomenAgePoints(ageRangeSelected);
+        }
+        return agePoints;
+    }
+
+    private int calculateMenAgePoints(String ageRangeSelected){
+        int agePoints = 0;
+
+        switch(ageRangeSelected) {
+            case "30 - 34":
+                agePoints = 0;
+                break;
+            case "35 - 39":
+                agePoints = 2;
+                break;
+            case "40 - 44":
+                agePoints = 5;
+                break;
+            case "45 - 49":
+                agePoints = 7;
+                break;
+            case "50 - 54":
+                agePoints = 8;
+                break;
+            case "55 - 59":
+                agePoints = 10;
+                break;
+            case "60 - 64":
+                agePoints = 11;
+                break;
+            case "65 - 69":
+                agePoints = 12;
+                break;
+            case "70 - 74":
+                agePoints = 14;
+                break;
+            case "75+":
+                agePoints = 15;
+                break;
+        }
+        return agePoints;
+    }
+
+    private int calculateWomenAgePoints(String ageRangeSelected){
+        int agePoints = 0;
+
+        switch(ageRangeSelected) {
+            case "30 - 34":
+                agePoints = 0;
+                break;
+            case "35 - 39":
+                agePoints = 2;
+                break;
+            case "40 - 44":
+                agePoints = 4;
+                break;
+            case "45 - 49":
+                agePoints = 5;
+                break;
+            case "50 - 54":
+                agePoints = 7;
+                break;
+            case "55 - 59":
+                agePoints = 8;
+                break;
+            case "60 - 64":
+                agePoints = 9;
+                break;
+            case "65 - 69":
+                agePoints = 10;
+                break;
+            case "70 - 74":
+                agePoints = 11;
+                break;
+            case "75+":
+                agePoints = 12;
+                break;
+        }
+        return agePoints;
+    }
+
+    // HDL POINTS CALCULATION
+    public int calculateHDLPoints(String gender) {
+        Button hdlSpinner = this.<Button>findViewById(R.id.hdlinput);
+        String hdlRangeSelected = hdlSpinner.getText().toString();
+
+        int HDLPoints = 0;
+
+        if(gender.equals("Hombre")) {
+            HDLPoints = calculateMenHDLPoints(hdlRangeSelected);
+        }
+
+        else if(gender.equals("Mujer")) {
+            HDLPoints = calculateWomenHDLPoints(hdlRangeSelected);
+        }
+        return HDLPoints;
+    }
+
+    private int calculateMenHDLPoints(String hdlRangeSelected){
+        int hdlPoints = 0;
+
+        switch(hdlRangeSelected) {
+            case "< 35.0":
+                hdlPoints = 2;
+                break;
+            case "35.0 - 45.9":
+                hdlPoints = 1;
+                break;
+            case "46.0 - 49.9":
+                hdlPoints = 0;
+                break;
+            case "50.0 - 61.9":
+                hdlPoints = -1;
+                break;
+            case "> 62.0":
+                hdlPoints = -2;
+                break;
+        }
+        return hdlPoints;
+    }
+
+    private int calculateWomenHDLPoints(String hdlRangeSelected){
+        int hdlPoints = 0;
+
+        switch(hdlRangeSelected) {
+            case "< 35.0":
+                hdlPoints = 2;
+                break;
+            case "35.0 - 45.9":
+                hdlPoints = 1;
+                break;
+            case "46.0 - 49.9":
+                hdlPoints = 0;
+                break;
+            case "50.0 - 61.9":
+                hdlPoints = -1;
+                break;
+            case "> 62.0":
+                hdlPoints = -2;
+                break;
+        }
+        return hdlPoints;
+    }
+
+    // TOTAL DL POINTS CALCULATION
+    public int calculateTotalDLPoints(String gender) {
+        Button totaldlSpinner = this.<Button>findViewById(R.id.totaldlinput);
+        String totaldlRangeSelected = totaldlSpinner.getText().toString();
+
+        int totalDLPoints = 0;
+        if(gender.equals("Hombre")) {
+            totalDLPoints = calculateMenTotalDLPoints(totaldlRangeSelected);
+        }
+
+        else if(gender.equals("Mujer")) {
+            totalDLPoints = calculateWomenTotalDLPoints(totaldlRangeSelected);
+        }
+        return totalDLPoints;
+    }
+
+    private int calculateMenTotalDLPoints(String totaldlRangeSelected){
+        int totaldlPoints = 0;
+
+        switch(totaldlRangeSelected) {
+            case "< 158":
+                totaldlPoints = 0;
+                break;
+            case "158 - 200":
+                totaldlPoints = 1;
+                break;
+            case "201 - 239":
+                totaldlPoints = 2;
+                break;
+            case "240 - 278":
+                totaldlPoints = 3;
+                break;
+            case "> 278":
+                totaldlPoints = 4;
+                break;
+        }
+        return totaldlPoints;
+    }
+
+    private int calculateWomenTotalDLPoints(String totaldlRangeSelected){
+        int totaldlPoints = 0;
+
+        switch(totaldlRangeSelected) {
+            case "< 158":
+                totaldlPoints = 0;
+                break;
+            case "158 - 200":
+                totaldlPoints = 1;
+                break;
+            case "201 - 239":
+                totaldlPoints = 3;
+                break;
+            case "240 - 278":
+                totaldlPoints = 4;
+                break;
+            case "> 278":
+                totaldlPoints = 5;
+                break;
+        }
+        return totaldlPoints;
+    }
+
+    // TA POINTS CALCULATION
+    public int calculateTAPoints(String gender) {
+        Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
+        String isOnTreatment = treatmentButton.getText().toString();
+
+        Button taSpinner = this.<Button>findViewById(R.id.tainput);
+        String taRangeSelected = taSpinner.getText().toString();
+
+        int taPoints = 0;
+        if(gender.equals("Hombre")) {
+            taPoints = calculateMenTotalTAPoints(taRangeSelected, isOnTreatment);
+        }
+
+        else if(gender.equals("Mujer")) {
+            taPoints = calculateWomenTotalTAPoints(taRangeSelected, isOnTreatment);
+        }
+        return taPoints;
+    }
+
+    private int calculateMenTotalTAPoints(String taRangeSelected, String isOnTreatment){
+        int taPoints = 0;
+
+        switch(taRangeSelected) {
+            case "< 120":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = -2;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 0;
+                }
+                break;
+            case "120 - 129":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 0;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 2;
+                }
+                break;
+            case "130 - 139":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 1;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 3;
+                }
+                break;
+            case "140 - 149":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 2;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 4;
+                }
+                break;
+            case "150 - 159":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 2;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 4;
+                }
+                break;
+            case "160+":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 3;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 5;
+                }
+                break;
+        }
+        return taPoints;
+    }
+
+    private int calculateWomenTotalTAPoints(String taRangeSelected, String isOnTreatment){
+        int taPoints = 0;
+
+        switch(taRangeSelected) {
+            case "< 120":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = -3;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = -1;
+                }
+                break;
+            case "120 - 129":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 0;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 2;
+                }
+                break;
+            case "130 - 139":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 1;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 3;
+                }
+                break;
+            case "140 - 149":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 2;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 5;
+                }
+                break;
+            case "150 - 159":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 4;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 6;
+                }
+                break;
+            case "160+":
+                if(isOnTreatment.equals("No")) {
+                    taPoints = 5;
+                }
+                if(isOnTreatment.equals("Si")) {
+                    taPoints = 7;
+                }
+                break;
+        }
+        return taPoints;
+    }
+
+    public void calculateButtonPressed(View view) {
+        Button genderButton = this.<Button>findViewById(R.id.genderinput);
+        String gender = genderButton.getText().toString();
+
+        int agePoints = calculateAgePoints(gender);
+        int hdlPoints = calculateHDLPoints(gender);
+        int dlPoints = calculateTotalDLPoints(gender);
+        int taPoints = calculateTAPoints(gender);
+
+        int Score = agePoints + hdlPoints + dlPoints + taPoints;
+        String ScoreString = Integer.toString(Score);
+        Log.d("Score:", ScoreString);
+
+        Snackbar.make(view, ScoreString, Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
 }
