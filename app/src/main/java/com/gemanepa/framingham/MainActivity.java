@@ -144,8 +144,8 @@ public class MainActivity extends AppCompatActivity {
 
     // AGE POINTS CALCULATION
     public int calculateAgePoints(String gender) {
-        Button ageSpinner = this.<Button>findViewById(R.id.ageinput);
-        String ageRangeSelected = ageSpinner.getText().toString();
+        ageSpinner = (Spinner) findViewById(R.id.ageinput);
+        String ageRangeSelected = ageSpinner.getSelectedItem().toString();
 
         int agePoints = 0;
         if(gender.equals("Hombre")) {
@@ -236,8 +236,8 @@ public class MainActivity extends AppCompatActivity {
 
     // HDL POINTS CALCULATION
     public int calculateHDLPoints(String gender) {
-        Button hdlSpinner = this.<Button>findViewById(R.id.hdlinput);
-        String hdlRangeSelected = hdlSpinner.getText().toString();
+        hdlSpinner = (Spinner) findViewById(R.id.hdlinput);
+        String hdlRangeSelected = hdlSpinner.getSelectedItem().toString();
 
         int HDLPoints = 0;
 
@@ -299,8 +299,8 @@ public class MainActivity extends AppCompatActivity {
 
     // TOTAL DL POINTS CALCULATION
     public int calculateTotalDLPoints(String gender) {
-        Button totaldlSpinner = this.<Button>findViewById(R.id.totaldlinput);
-        String totaldlRangeSelected = totaldlSpinner.getText().toString();
+        totaldlSpinner = (Spinner) findViewById(R.id.totaldlinput);
+        String totaldlRangeSelected = totaldlSpinner.getSelectedItem().toString();
 
         int totalDLPoints = 0;
         if(gender.equals("Hombre")) {
@@ -361,11 +361,11 @@ public class MainActivity extends AppCompatActivity {
 
     // TA POINTS CALCULATION
     public int calculateTAPoints(String gender) {
+        taSpinner = (Spinner) findViewById(R.id.tainput);
+        String taRangeSelected = taSpinner.getSelectedItem().toString();
+
         Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
         String isOnTreatment = treatmentButton.getText().toString();
-
-        Button taSpinner = this.<Button>findViewById(R.id.tainput);
-        String taRangeSelected = taSpinner.getText().toString();
 
         int taPoints = 0;
         if(gender.equals("Hombre")) {
