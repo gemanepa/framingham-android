@@ -144,13 +144,9 @@ public class MainActivity extends AppCompatActivity {
         //value to be shown in the spinners
         String [] ageRanges = {"30 - 34", "35 - 39", "40 - 44", "45 - 49", "50 - 54", "55 - 59", "60 - 64", "65 - 69", "70 - 74", "75+"};
         String [] hdlRanges = {"< 35.0", "35.0 - 45.9", "46.0 - 49.9", "50.0 - 61.9", "> 62.0"};
-        String [] ldlRanges = {"< 80.0", "> 80.0"};
+        String [] ldlRanges = {"< 80.0", "80.0 - 135.0", "> 135.0"};
         String [] totaldlRanges = {"< 158", "158 - 200", "201 - 239", "240 - 278", "> 278"};
-
-        Button genderButton = findViewById(R.id.genderinput);
-        String gender = genderButton.getText().toString();
-        String [] waistRanges = getWaist(gender);
-
+        String [] waistRanges = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
         String [] taRanges = {"< 120", "120 - 129", "130 - 139", "140 - 149", "150 - 159", "160+"};
 
         //array adapters used to bind values in the spinners
@@ -235,6 +231,10 @@ public class MainActivity extends AppCompatActivity {
             genderButton.setText("Hombre");
             // Log.d("Genre Second Conditional", genderButtonCurrentState);
         }
+        waistSpinner = (Spinner) findViewById(R.id.waistinput);
+        String [] waistRanges = getWaist(genderButtonCurrentState);
+        ArrayAdapter<String> waistAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, waistRanges);
+        waistSpinner.setAdapter(waistAdapter);
     }
 
     public void smokingSwitch(View view) {
@@ -1157,15 +1157,16 @@ public class MainActivity extends AppCompatActivity {
         String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
         String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
         String [] womenWaist = {"-", "< 88cm (35inches)", "> 88cm (35inches)"};
+        String stringed = waist.toString();
+        Log.d("inside get waist", stringed);
         switch(gender) {
             case "Hombre":
-                waist = menWaist;
+                waist = womenWaist;
+                Log.d("inside switch hombre", stringed);
                 break;
             case "Mujer":
-                waist = womenWaist;
-                break;
-            default:
                 waist = menWaist;
+                Log.d("inside switch mujer", stringed);
                 break;
         }
         return waist;
