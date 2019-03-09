@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="50dp"
+    android:id="@+id/bottom_sheet"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/darker_gray"
+        android:clipToPadding="true"
+        app:elevation="4dp"
+        android:onClick="closeBottomSheet">
+
+        <TextView
+            android:id="@+id/bottomsheetScoreText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingTop="26dp"
+            android:text=""
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/bottomsheetCVDText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp"
+            android:paddingLeft="16dp"
+            android:paddingTop="66dp"/>
+
+        <TextView
+            android:id="@+id/bottomsheetCVDExplanationText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="9sp"
+            android:paddingRight="8dp"
+            android:paddingTop="86dp"
+            android:gravity="right"/>
+
+        <TextView
+            android:id="@+id/bottomsheetHeartAgeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp"
+            android:paddingLeft="16dp"
+            android:paddingTop="106dp"/>
+
+        <TextView
+            android:id="@+id/bottomsheetRiskLevelText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp"
+            android:paddingLeft="16dp"
+            android:paddingTop="146dp"/>
+
+        <TextView
+            android:id="@+id/bottomsheetTreatmentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Treatment"
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="16sp"
+            android:paddingLeft="16dp"
+            android:paddingTop="186dp"/>
+
+        <TextView
+            android:id="@+id/bottomsheetNeedsTreatmentText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="12sp"
+            android:paddingLeft="24dp"
+            android:paddingTop="206dp"/>
+
+
+
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

@@ -26,15 +26,24 @@ import android.support.v7.widget.Toolbar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
+// Bottom Sheet
+import android.support.design.widget.BottomSheetBehavior;
+import android.widget.TextView;
+
 // Logging
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
     Spinner ageSpinner;
-    Spinner taSpinner;
+
     Spinner hdlSpinner;
+    Spinner ldlSpinner;
     Spinner totaldlSpinner;
+    Spinner waistSpinner;
+    Spinner taSpinner;
+    BottomSheetBehavior mBottomSheetBehavior;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,25 +52,80 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         //Init float action button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Button genderButton = findViewById(R.id.genderinput);
-                String gender = genderButton.getText().toString();
+                //Init bottom sheet
+                View bottomSheet = findViewById(R.id.bottom_sheet);
 
-                int agePoints = calculateAgePoints(gender);
-                int hdlPoints = calculateHDLPoints(gender);
-                int dlPoints = calculateTotalDLPoints(gender);
-                int taPoints = calculateTAPoints(gender);
+                mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
 
-                int Score = agePoints + hdlPoints + dlPoints + taPoints;
-                String ScoreString = Integer.toString(Score);
-                Log.d("Score:", ScoreString);
+                // Start calculation when pressing button only if Bottom Sheet is not expanded...
+                if(mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    // Init Score Calculation
+                    Button genderButton = findViewById(R.id.genderinput);
+                    String gender = genderButton.getText().toString();
 
-                Snackbar.make(view, ScoreString, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                    int agePoints = calculateAgePoints(gender);
+                    int hdlPoints = calculateHDLPoints(gender);
+                    int dlPoints = calculateTotalDLPoints(gender);
+                    int taPoints = calculateTAPoints(gender);
+
+                    // Total score
+                    int score = agePoints + hdlPoints + dlPoints + taPoints;
+
+                    // Passing total score to String
+                    String scoreString = Integer.toString(score);
+
+                    // Total Score rendering
+                    TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
+                    bottomsheetScoreText.setText("Score: " + scoreString);
+
+
+                    // CVD calculation
+                    String cvd = calculateCVD(score, gender);
+
+                    // CVD rendering
+                    TextView bottomsheetCVDText = findViewById(R.id.bottomsheetCVDText);
+                    bottomsheetCVDText.setText("CVD: " + cvd);
+
+                    TextView bottomsheetCVDExplanationText = findViewById(R.id.bottomsheetCVDExplanationText);
+                    bottomsheetCVDExplanationText.setText("*" + "CVD: CardioVascular Disease Risk in 10 years");
+
+
+                    // Heart Age calculation
+                    String heartage = calculateHeartAge(score, gender);
+
+                    // Heart Age rendering
+                    TextView bottomsheetHeartAgeText = findViewById(R.id.bottomsheetHeartAgeText);
+                    bottomsheetHeartAgeText.setText("Heart Age: " + heartage);
+
+
+                    // Risk Level Calculation
+                    String risklevel = calculateRiskLevel(score, gender);
+
+                    // Risk Level Rendering
+                    TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText);
+                    bottomsheetRiskLevelText.setText("Risk Level: " + risklevel);
+
+                    // ¿Needs treatment? Calculation
+                   String needstreatment = needsTreatment(risklevel);
+
+                    // ¿Needs treatment? Rendering
+                    TextView bottomsheetNeedsTreatmentText = findViewById(R.id.bottomsheetNeedsTreatmentText);
+                    bottomsheetNeedsTreatmentText.setText("" + needstreatment);
+
+                    // Expanding bottom sheet to show data
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+                //if Bottom Sheet is already expanded, it will be collapsed...
+                else {
+                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+                }
             }
         });
 
@@ -69,25 +133,40 @@ public class MainActivity extends AppCompatActivity {
         //Init Spinners
         ageSpinner = (Spinner) findViewById(R.id.ageinput);
         hdlSpinner = (Spinner) findViewById(R.id.hdlinput);
+        ldlSpinner = (Spinner) findViewById(R.id.ldlinput);
         totaldlSpinner = (Spinner) findViewById(R.id.totaldlinput);
+        waistSpinner = (Spinner) findViewById(R.id.waistinput);
         taSpinner = (Spinner) findViewById(R.id.tainput);
+
+
+
 
         //value to be shown in the spinners
         String [] ageRanges = {"30 - 34", "35 - 39", "40 - 44", "45 - 49", "50 - 54", "55 - 59", "60 - 64", "65 - 69", "70 - 74", "75+"};
         String [] hdlRanges = {"< 35.0", "35.0 - 45.9", "46.0 - 49.9", "50.0 - 61.9", "> 62.0"};
+        String [] ldlRanges = {"< 80.0", "> 80.0"};
         String [] totaldlRanges = {"< 158", "158 - 200", "201 - 239", "240 - 278", "> 278"};
+
+        Button genderButton = findViewById(R.id.genderinput);
+        String gender = genderButton.getText().toString();
+        String [] waistRanges = getWaist(gender);
+
         String [] taRanges = {"< 120", "120 - 129", "130 - 139", "140 - 149", "150 - 159", "160+"};
 
         //array adapters used to bind values in the spinners
         ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ageRanges);
         ArrayAdapter<String> hdlAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hdlRanges);
+        ArrayAdapter<String> ldlAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, ldlRanges);
         ArrayAdapter<String> totaldlAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, totaldlRanges);
         ArrayAdapter<String> taAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, taRanges);
+        ArrayAdapter<String> waistAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, waistRanges);
 
         ageSpinner.setAdapter(ageAdapter);
         hdlSpinner.setAdapter(hdlAdapter);
+        ldlSpinner.setAdapter(ldlAdapter);
         totaldlSpinner.setAdapter(totaldlAdapter);
         taSpinner.setAdapter(taAdapter);
+        waistSpinner.setAdapter(waistAdapter);
     }
 
     @Override
@@ -168,6 +247,20 @@ public class MainActivity extends AppCompatActivity {
         }
         else if(smokerButtonCurrentState.equals("Si")) {
             smokerButton.setText("No");
+            //Log.d("Smoking 2nd Conditional", genderButtonCurrentState);
+        }
+    }
+
+    public void diabetesSwitch(View view) {
+        Button diabetesButton = this.<Button>findViewById(R.id.diabetesinput);
+        String diabetesButtonCurrentState = diabetesButton.getText().toString();
+        //Log.d("Smoking PreConditional", genderButtonCurrentState);
+        if(diabetesButtonCurrentState.equals("No")) {
+            diabetesButton.setText("Si");
+            //Log.d("Smoking 1st Conditional", genderButtonCurrentState);
+        }
+        else if(diabetesButtonCurrentState.equals("Si")) {
+            diabetesButton.setText("No");
             //Log.d("Smoking 2nd Conditional", genderButtonCurrentState);
         }
     }
@@ -534,20 +627,547 @@ public class MainActivity extends AppCompatActivity {
         return taPoints;
     }
 
-    public void calculateButtonPressed(View view) {
-        Button genderButton = this.<Button>findViewById(R.id.genderinput);
-        String gender = genderButton.getText().toString();
+    public void closeBottomSheet(View view) {
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
 
-        int agePoints = calculateAgePoints(gender);
-        int hdlPoints = calculateHDLPoints(gender);
-        int dlPoints = calculateTotalDLPoints(gender);
-        int taPoints = calculateTAPoints(gender);
+    // CVD Calculation
+    public String calculateCVD(int Score, String gender) {
+        String cvd = "0";
+        if(gender.equals("Hombre")) {
+            cvd = calculateMenCVD(Score);
+        }
 
-        int Score = agePoints + hdlPoints + dlPoints + taPoints;
-        String ScoreString = Integer.toString(Score);
-        Log.d("Score:", ScoreString);
+        else if(gender.equals("Mujer")) {
+            cvd = calculateWomenCVD(Score);
+        }
+        return cvd;
+    }
 
-        Snackbar.make(view, ScoreString, Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show();
+
+    private String calculateMenCVD(int Score){
+        String cvd = "0%";
+
+        switch(Score) {
+            case -5:
+                cvd = "< 1%";
+                break;
+            case -4:
+                cvd = "< 1%";
+                break;
+            case -3:
+                cvd = "< 1%";
+                break;
+            case -2:
+                cvd = "1.1%";
+                break;
+            case -1:
+                cvd = "1.4%";
+                break;
+            case 0:
+                cvd = "1.6%";
+                break;
+            case 1:
+                cvd = "1.9%";
+                break;
+            case 2:
+                cvd = "2.3%";
+                break;
+            case 3:
+                cvd = "2.8%";
+                break;
+            case 4:
+                cvd = "3.3%";
+                break;
+            case 5:
+                cvd = "3.9%";
+                break;
+            case 6:
+                cvd = "4.7%";
+                break;
+            case 7:
+                cvd = "5.6%";
+                break;
+            case 8:
+                cvd = "6.7%";
+                break;
+            case 9:
+                cvd = "7.9%";
+                break;
+            case 10:
+                cvd = "9.4%";
+                break;
+            case 11:
+                cvd = "11.2%";
+                break;
+            case 12:
+                cvd = "13.3%";
+                break;
+            case 13:
+                cvd = "15.6%";
+                break;
+            case 14:
+                cvd = "18.4%";
+                break;
+            case 15:
+                cvd = "21.6%";
+                break;
+            case 16:
+                cvd = "25.3%";
+                break;
+            case 17:
+                cvd = "29.4%";
+                break;
+            case 18:
+                cvd = "> 30%";
+                break;
+            case 19:
+                cvd = "> 30%";
+                break;
+            case 20:
+                cvd = "> 30%";
+                break;
+            case 21:
+                cvd = "> 30%";
+                break;
+            case 22:
+                cvd = "> 30%";
+                break;
+            case 23:
+                cvd = "> 30%";
+                break;
+            case 24:
+                cvd = "> 30%";
+                break;
+            case 25:
+                cvd = "> 30%";
+                break;
+            case 26:
+                cvd = "> 30%";
+                break;
+        }
+        return cvd;
+    }
+
+    private String calculateWomenCVD(int Score){
+        String cvd = "0%";
+
+        switch(Score) {
+            case -5:
+                cvd = "< 1%";
+                break;
+            case -4:
+                cvd = "< 1%";
+                break;
+            case -3:
+                cvd = "< 1%";
+                break;
+            case -2:
+                cvd = "< 1%";
+                break;
+            case -1:
+                cvd = "1.0%";
+                break;
+            case 0:
+                cvd = "1.2%";
+                break;
+            case 1:
+                cvd = "1.5%";
+                break;
+            case 2:
+                cvd = "1.7%";
+                break;
+            case 3:
+                cvd = "2.0%";
+                break;
+            case 4:
+                cvd = "2.4%";
+                break;
+            case 5:
+                cvd = "2.8%";
+                break;
+            case 6:
+                cvd = "3.3%";
+                break;
+            case 7:
+                cvd = "3.9%";
+                break;
+            case 8:
+                cvd = "4.5%";
+                break;
+            case 9:
+                cvd = "5.3%";
+                break;
+            case 10:
+                cvd = "6.3%";
+                break;
+            case 11:
+                cvd = "7.3%";
+                break;
+            case 12:
+                cvd = "8.6%";
+                break;
+            case 13:
+                cvd = "10.0%";
+                break;
+            case 14:
+                cvd = "11.7%";
+                break;
+            case 15:
+                cvd = "13.7%";
+                break;
+            case 16:
+                cvd = "15.9%";
+                break;
+            case 17:
+                cvd = "18.51%";
+                break;
+            case 18:
+                cvd = "21.5%";
+                break;
+            case 19:
+                cvd = "24.8%";
+                break;
+            case 20:
+                cvd = "27.5%";
+                break;
+            case 21:
+                cvd = "> 30%";
+                break;
+            case 22:
+                cvd = "> 30%";
+                break;
+            case 23:
+                cvd = "> 30%";
+                break;
+            case 24:
+                cvd = "> 30%";
+                break;
+            case 25:
+                cvd = "> 30%";
+                break;
+            case 26:
+                cvd = "> 30%";
+                break;
+        }
+        return cvd;
+    }
+
+    // Heart Age Calculation
+    public String calculateHeartAge(int Score, String gender) {
+        String heartage = "0";
+        if(gender.equals("Hombre")) {
+            heartage = calculateMenHeartAge(Score);
+        }
+
+        else if(gender.equals("Mujer")) {
+            heartage = calculateWomenHeartAge(Score);
+        }
+        return heartage;
+    }
+
+
+    private String calculateMenHeartAge(int Score){
+        String heartage = "30";
+
+        switch(Score) {
+            case -5:
+                heartage = "< 30";
+                break;
+            case -4:
+                heartage = "< 30";
+                break;
+            case -3:
+                heartage = "< 30";
+                break;
+            case -2:
+                heartage = "< 30";
+                break;
+            case -1:
+                heartage = "< 30";
+                break;
+            case 0:
+                heartage = "30";
+                break;
+            case 1:
+                heartage = "31";
+                break;
+            case 2:
+                heartage = "34";
+                break;
+            case 3:
+                heartage = "36";
+                break;
+            case 4:
+                heartage = "38";
+                break;
+            case 5:
+                heartage = "40";
+                break;
+            case 6:
+                heartage = "42";
+                break;
+            case 7:
+                heartage = "45";
+                break;
+            case 8:
+                heartage = "48";
+                break;
+            case 9:
+                heartage = "51";
+                break;
+            case 10:
+                heartage = "54";
+                break;
+            case 11:
+                heartage = "57";
+                break;
+            case 12:
+                heartage = "60";
+                break;
+            case 13:
+                heartage = "64";
+                break;
+            case 14:
+                heartage = "68";
+                break;
+            case 15:
+                heartage = "72";
+                break;
+            case 16:
+                heartage = "76";
+                break;
+            case 17:
+                heartage = "> 80";
+                break;
+            case 18:
+                heartage = "> 80";
+                break;
+            case 19:
+                heartage = "> 80";
+                break;
+            case 20:
+                heartage = "> 80";
+                break;
+            case 21:
+                heartage = "> 80";
+                break;
+            case 22:
+                heartage = "> 80";
+                break;
+            case 23:
+                heartage = "> 80";
+                break;
+            case 24:
+                heartage = "> 80";
+                break;
+            case 25:
+                heartage = "> 80";
+                break;
+            case 26:
+                heartage = "> 80";
+                break;
+        }
+        return heartage;
+    }
+
+    private String calculateWomenHeartAge(int Score){
+        String heartage = "0%";
+
+        switch(Score) {
+            case -5:
+                heartage = "< 30";
+                break;
+            case -4:
+                heartage = "< 30";
+                break;
+            case -3:
+                heartage = "< 30";
+                break;
+            case -2:
+                heartage = "< 30";
+                break;
+            case -1:
+                heartage = "< 30";
+                break;
+            case 0:
+                heartage = "< 30";
+                break;
+            case 1:
+                heartage = "31";
+                break;
+            case 2:
+                heartage = "34";
+                break;
+            case 3:
+                heartage = "36";
+                break;
+            case 4:
+                heartage = "39";
+                break;
+            case 5:
+                heartage = "42";
+                break;
+            case 6:
+                heartage = "45";
+                break;
+            case 7:
+                heartage = "48";
+                break;
+            case 8:
+                heartage = "51";
+                break;
+            case 9:
+                heartage = "55";
+                break;
+            case 10:
+                heartage = "59";
+                break;
+            case 11:
+                heartage = "64";
+                break;
+            case 12:
+                heartage = "68";
+                break;
+            case 13:
+                heartage = "73";
+                break;
+            case 14:
+                heartage = "79";
+                break;
+            case 15:
+                heartage = "> 80";
+                break;
+            case 16:
+                heartage = "> 80";
+                break;
+            case 17:
+                heartage = "> 80";
+                break;
+            case 18:
+                heartage = "> 80";
+                break;
+            case 19:
+                heartage = "> 80";
+                break;
+            case 20:
+                heartage = "> 80";
+                break;
+            case 21:
+                heartage = "> 80";
+                break;
+            case 22:
+                heartage = "> 80";
+                break;
+            case 23:
+                heartage = "> 80";
+                break;
+            case 24:
+                heartage = "> 80";
+                break;
+            case 25:
+                heartage = "> 80";
+                break;
+            case 26:
+                heartage = "> 80";
+                break;
+        }
+        return heartage;
+    }
+
+    // Risk Level Calculation
+    public String calculateRiskLevel(int Score, String gender) {
+        String risklevel = "Unknown";
+        if(gender.equals("Hombre")) {
+            risklevel = calculateMenRiskLevel(Score);
+        }
+
+        else if(gender.equals("Mujer")) {
+            risklevel = calculateWomenRiskLevel(Score);
+        }
+        return risklevel;
+    }
+
+    private String calculateMenRiskLevel(int Score){
+        String risklevel = "Unknown";
+
+        if (Score <= 10) {
+            risklevel = "Low";
+        }
+
+        else if (Score >= 11 && Score <= 14) {
+            risklevel = "Intermediate";
+        }
+
+        else if (Score >= 15) {
+            risklevel = "High";
+        }
+        return risklevel;
+    }
+
+    private String calculateWomenRiskLevel(int Score){
+        String risklevel = "Unknown";
+
+        if (Score <= 12) {
+            risklevel = "Low";
+        }
+
+        else if (Score >= 13 && Score <= 17) {
+            risklevel = "Intermediate";
+        }
+
+        else if (Score >= 18) {
+            risklevel = "High";
+        }
+        return risklevel;
+    }
+
+    public String needsTreatment(String risklevel){
+        String needstreatment = "Unknown";
+
+        switch(risklevel) {
+            case "Low":
+                needstreatment = "Patient not requires treatment.\n" +
+                        "Statins only indicated if:\n"  +
+                        "• Diabetes mellitus + Age ≥ 40 years \n" +
+                        "• Clinical atherosclerosis\n" +
+                        "• Abdominal aortic aneurysm\n" +
+                        "• Chronic kidney disease\n" +
+                        "(age ≥ 50 years)\n" +
+                        "eGFR <60 mL/min/1.73 m2 or\n" +
+                        "ACR > 3 mg/mmol\n";
+                break;
+            case "Intermediate":
+                needstreatment = "Only if yadah yadah hipertension diabetes";
+                break;
+            case "High":
+                needstreatment = "• Patient highly requires treatment\n" +
+                "• Primary Target: ≤2 mmol/L or ≥50% decrease in LDL-C\n" +
+                "• Alternative Target: Apo B ≤0.8 g/L\n" +
+                "• Alternative Target: Non-HDL-C ≤2.6 mmol/L\n";
+                ;
+                break;
+        }
+        return needstreatment;
+    }
+
+    public String[] getWaist(String gender) {
+        String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] womenWaist = {"-", "< 88cm (35inches)", "> 88cm (35inches)"};
+        switch(gender) {
+            case "Hombre":
+                waist = menWaist;
+                break;
+            case "Mujer":
+                waist = womenWaist;
+                break;
+            default:
+                waist = menWaist;
+                break;
+        }
+        return waist;
     }
 }

@@ -19,20 +19,20 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
         <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:padding="15dp"
-            android:text="Framingham Score"
-            android:textColor="@android:color/background_light"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            />
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="15dp"
+        android:text="Framingham Score"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
+    <include layout="@layout/bottomsheet_main" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
