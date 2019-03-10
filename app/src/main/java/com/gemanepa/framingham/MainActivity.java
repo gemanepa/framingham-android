@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Start calculation when pressing button only if Bottom Sheet is not expanded...
                 if(mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+
                     // Init Score Calculation
                     Button genderButton = findViewById(R.id.genderinput);
                     String gender = genderButton.getText().toString();
@@ -74,9 +75,10 @@ public class MainActivity extends AppCompatActivity {
                     int hdlPoints = calculateHDLPoints(gender);
                     int dlPoints = calculateTotalDLPoints(gender);
                     int taPoints = calculateTAPoints(gender);
+                    int smokingPoints = calculateSmokingPoints(gender);
 
                     // Total score
-                    int score = agePoints + hdlPoints + dlPoints + taPoints;
+                    int score = agePoints + hdlPoints + dlPoints + taPoints + smokingPoints;
 
                     // Passing total score to String
                     String scoreString = Integer.toString(score);
@@ -112,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
                     TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText);
                     bottomsheetRiskLevelText.setText("Risk Level: " + risklevel);
 
+
                     // ¿Needs treatment? Calculation
-                   String needstreatment = needsTreatment(risklevel);
+                   String needstreatment = needsTreatment(risklevel, gender, agePoints, hdlPoints, smokingPoints);
 
                     // ¿Needs treatment? Rendering
                     TextView bottomsheetNeedsTreatmentText = findViewById(R.id.bottomsheetNeedsTreatmentText);
@@ -237,45 +240,52 @@ public class MainActivity extends AppCompatActivity {
         waistSpinner.setAdapter(waistAdapter);
     }
 
+    public String[] getWaist(String gender) {
+        String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] womenWaist = {"-", "< 88cm (35inches)", "> 88cm (35inches)"};
+        String stringed = waist.toString();
+        switch(gender) {
+            case "Hombre":
+                waist = womenWaist;
+                break;
+            case "Mujer":
+                waist = menWaist;
+                break;
+        }
+        return waist;
+    }
+
     public void smokingSwitch(View view) {
         Button smokerButton = this.<Button>findViewById(R.id.smokerinput);
         String smokerButtonCurrentState = smokerButton.getText().toString();
-        //Log.d("Smoking PreConditional", genderButtonCurrentState);
         if(smokerButtonCurrentState.equals("No")) {
             smokerButton.setText("Si");
-            //Log.d("Smoking 1st Conditional", genderButtonCurrentState);
         }
         else if(smokerButtonCurrentState.equals("Si")) {
             smokerButton.setText("No");
-            //Log.d("Smoking 2nd Conditional", genderButtonCurrentState);
         }
     }
 
     public void diabetesSwitch(View view) {
         Button diabetesButton = this.<Button>findViewById(R.id.diabetesinput);
         String diabetesButtonCurrentState = diabetesButton.getText().toString();
-        //Log.d("Smoking PreConditional", genderButtonCurrentState);
         if(diabetesButtonCurrentState.equals("No")) {
             diabetesButton.setText("Si");
-            //Log.d("Smoking 1st Conditional", genderButtonCurrentState);
         }
         else if(diabetesButtonCurrentState.equals("Si")) {
             diabetesButton.setText("No");
-            //Log.d("Smoking 2nd Conditional", genderButtonCurrentState);
         }
     }
 
     public void treatmentSwitch(View view) {
         Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
         String treatmentButtonCurrentState = treatmentButton.getText().toString();
-        //Log.d("Treatment PreCond", treatmentButtonCurrentState);
         if(treatmentButtonCurrentState.equals("No")) {
             treatmentButton.setText("Si");
-            //Log.d("Treatment 1st Cond", treatmentButtonCurrentState);
         }
         else if(treatmentButtonCurrentState.equals("Si")) {
             treatmentButton.setText("No");
-            //Log.d("Treatment 2nd Cond", treatmentButtonCurrentState);
         }
     }
 
@@ -627,6 +637,25 @@ public class MainActivity extends AppCompatActivity {
         return taPoints;
     }
 
+    public int calculateSmokingPoints(String gender) {
+        Button smokerButton = this.<Button>findViewById(R.id.smokerinput);
+        String smokerButtonCurrentState = smokerButton.getText().toString();
+        int smokingpoints = 0;
+        //Log.d("Smoking PreConditional", genderButtonCurrentState);
+        if(smokerButtonCurrentState.equals("No")) {
+            smokingpoints = 0;
+            //Log.d("Smoking 1st Conditional", genderButtonCurrentState);
+        }
+        else if(smokerButtonCurrentState.equals("Si")) {
+            switch(gender) {
+                case "Hombre":
+                    smokingpoints = 4;
+                case "Mujer":
+                    smokingpoints = 3;
+            }
+        }
+        return smokingpoints;
+    }
     public void closeBottomSheet(View view) {
         View bottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
@@ -1124,51 +1153,76 @@ public class MainActivity extends AppCompatActivity {
         return risklevel;
     }
 
-    public String needsTreatment(String risklevel){
+    public String needsTreatment(String risklevel, String gender, int agePoints, int hdlPoints, int smokingPoints){
         String needstreatment = "Unknown";
+
+        Button diabetesButton = this.<Button>findViewById(R.id.diabetesinput);
+        String diabetesButtonCurrentState = diabetesButton.getText().toString();
+
+        waistSpinner = (Spinner) findViewById(R.id.waistinput);
+        String waistRangeSelected = waistSpinner.getSelectedItem().toString();
+
+        ldlSpinner = (Spinner) findViewById(R.id.ldlinput);
+        String ldlRangeSelected = ldlSpinner.getSelectedItem().toString();
+        Log.d("ldl", ldlRangeSelected);
 
         switch(risklevel) {
             case "Low":
-                needstreatment = "Patient not requires treatment.\n" +
-                        "Statins only indicated if:\n"  +
-                        "• Diabetes mellitus + Age ≥ 40 years \n" +
+                if (
+                     (gender.equals("Hombre") && agePoints >= 5 && diabetesButtonCurrentState.equals("Si")) ||
+                    (gender.equals("Mujer") && agePoints >= 4 && diabetesButtonCurrentState.equals("Si"))
+                ) {
+                    needstreatment = "Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person";
+                }
+                else {needstreatment = "Patient not requires treatment.\n" +
+                        "Statins only indicated in case of:\n"  +
                         "• Clinical atherosclerosis\n" +
                         "• Abdominal aortic aneurysm\n" +
                         "• Chronic kidney disease\n" +
                         "(age ≥ 50 years)\n" +
                         "eGFR <60 mL/min/1.73 m2 or\n" +
-                        "ACR > 3 mg/mmol\n";
+                        "ACR > 3 mg/mmol\n";}
                 break;
             case "Intermediate":
-                needstreatment = "Only if yadah yadah hipertension diabetes";
-                break;
+                Log.d("intermediate switch", ldlRangeSelected);
+                if (
+                        (gender.equals("Hombre") && agePoints >= 8 && (    hdlPoints == 2 ||
+                                smokingPoints > 1 ||
+                                diabetesButtonCurrentState.equals("Si") ||
+                                waistRangeSelected.equals("> 102cm (40inches)") ||
+                                waistRangeSelected.equals("> 88cm (35inches)")
+                        )) ||
+                        (gender.equals("Mujer") && agePoints >= 9 && (    hdlPoints == 2 ||
+                                smokingPoints > 1 ||
+                                diabetesButtonCurrentState.equals("Si") ||
+                                waistRangeSelected.equals("> 102cm (40inches)") ||
+                                waistRangeSelected.equals("> 88cm (35inches)")
+                        ))
+                ) {
+                        needstreatment = "While Risk Level is not High, the patient presents risk factors for its age and requires treatment";
+
+                }
+                else if (ldlRangeSelected.equals("> 135.0")) {
+                    needstreatment = "While Risk Level is not High, the patient requires treatment due to inappropriate high levels of LDL";
+                }
+                else {
+                    needstreatment = "While Risk Level is not Low, the patient presents no risk factors for its age and would generally require no meds treatment";
+                }
+            break;
+
             case "High":
                 needstreatment = "• Patient highly requires treatment\n" +
-                "• Primary Target: ≤2 mmol/L or ≥50% decrease in LDL-C\n" +
-                "• Alternative Target: Apo B ≤0.8 g/L\n" +
-                "• Alternative Target: Non-HDL-C ≤2.6 mmol/L\n";
+                        "• Primary Target: ≤2 mmol/L or ≥50% decrease in LDL-C\n" +
+                        "• Alternative Target: Apo B ≤0.8 g/L\n" +
+                        "• Alternative Target: Non-HDL-C ≤2.6 mmol/L\n";
                 ;
                 break;
         }
-        return needstreatment;
-    }
 
-    public String[] getWaist(String gender) {
-        String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
-        String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
-        String [] womenWaist = {"-", "< 88cm (35inches)", "> 88cm (35inches)"};
-        String stringed = waist.toString();
-        Log.d("inside get waist", stringed);
-        switch(gender) {
-            case "Hombre":
-                waist = womenWaist;
-                Log.d("inside switch hombre", stringed);
-                break;
-            case "Mujer":
-                waist = menWaist;
-                Log.d("inside switch mujer", stringed);
-                break;
+        return needstreatment;
         }
-        return waist;
-    }
+
+
+
+
 }

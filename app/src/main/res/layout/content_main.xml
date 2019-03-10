@@ -291,7 +291,7 @@
                 android:layout_marginTop="13dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:text="Diabetes"
+                android:text="Diabetes o Glucemia alta en ayunas"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:textColor="#4689C8"
                 android:textSize="18sp"
