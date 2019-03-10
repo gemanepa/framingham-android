@@ -15,9 +15,9 @@
         android:layout_height="match_parent"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="0dp"
-        android:background="@android:color/darker_gray"
         android:clipToPadding="true"
         app:elevation="4dp"
+        android:background="#7cb9fb"
         android:onClick="closeBottomSheet">
 
         <TextView
@@ -27,28 +27,31 @@
             android:paddingLeft="16dp"
             android:paddingTop="26dp"
             android:text=""
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="16sp" />
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:textSize="34sp" />
 
         <TextView
             android:id="@+id/bottomsheetCVDText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="16sp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:textSize="34sp"
             android:paddingLeft="16dp"
-            android:paddingTop="66dp"/>
+            android:paddingTop="96dp"/>
 
         <TextView
             android:id="@+id/bottomsheetCVDExplanationText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@android:color/holo_red_light"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
             android:textSize="9sp"
             android:paddingRight="8dp"
-            android:paddingTop="86dp"
+            android:paddingTop="136dp"
             android:gravity="right"/>
 
         <TextView
@@ -56,40 +59,45 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="16sp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:textSize="34sp"
             android:paddingLeft="16dp"
-            android:paddingTop="106dp"/>
+            android:paddingTop="166dp"/>
 
         <TextView
             android:id="@+id/bottomsheetRiskLevelText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="16sp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:textSize="34sp"
             android:paddingLeft="16dp"
-            android:paddingTop="146dp"/>
+            android:paddingTop="236dp"/>
 
         <TextView
             android:id="@+id/bottomsheetTreatmentTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Treatment"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="16sp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:textSize="34sp"
             android:paddingLeft="16dp"
-            android:paddingTop="186dp"/>
+            android:paddingTop="306dp"/>
 
         <TextView
             android:id="@+id/bottomsheetNeedsTreatmentText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="12sp"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold"
+            android:textSize="16sp"
             android:paddingLeft="24dp"
-            android:paddingTop="206dp"/>
+            android:paddingRight="24dp"
+            android:paddingTop="346dp"/>
 
 
 

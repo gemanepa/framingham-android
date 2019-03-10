@@ -36,7 +36,6 @@ import android.util.Log;
 public class MainActivity extends AppCompatActivity {
 
     Spinner ageSpinner;
-
     Spinner hdlSpinner;
     Spinner ldlSpinner;
     Spinner totaldlSpinner;
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Init float action button
-        FloatingActionButton fab = findViewById(R.id.fab);
+        final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Risk Level Rendering
                     TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText);
-                    bottomsheetRiskLevelText.setText("Risk Level: " + risklevel);
+                    bottomsheetRiskLevelText.setText("Risk: " + risklevel);
 
 
                     // ¿Needs treatment? Calculation
@@ -122,11 +121,17 @@ public class MainActivity extends AppCompatActivity {
                     TextView bottomsheetNeedsTreatmentText = findViewById(R.id.bottomsheetNeedsTreatmentText);
                     bottomsheetNeedsTreatmentText.setText("" + needstreatment);
 
+                    // Changing floating button icon
+                    fab.setImageResource(android.R.drawable.ic_menu_revert);
+
                     // Expanding bottom sheet to show data
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
                 //if Bottom Sheet is already expanded, it will be collapsed...
                 else {
+                    // Changing floating button icon
+                    fab.setImageResource(android.R.drawable.ic_menu_send);
+
                     mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
                 }
             }
@@ -222,24 +227,22 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
+    // Button Switches Methods
     public void genderSwitch(View view) {
         Button genderButton = this.<Button>findViewById(R.id.genderinput);
         String genderButtonCurrentState = genderButton.getText().toString();
-        //Log.d("Genre Before Conditional", genderButtonCurrentState);
         if(genderButtonCurrentState.equals("Hombre")) {
             genderButton.setText("Mujer");
-            // Log.d("Genre First Conditional", genderButtonCurrentState);
         }
         else if(genderButtonCurrentState.equals("Mujer")) {
             genderButton.setText("Hombre");
-            // Log.d("Genre Second Conditional", genderButtonCurrentState);
         }
         waistSpinner = (Spinner) findViewById(R.id.waistinput);
         String [] waistRanges = getWaist(genderButtonCurrentState);
         ArrayAdapter<String> waistAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, waistRanges);
         waistSpinner.setAdapter(waistAdapter);
     }
-
+    // ... Method used by genderSwitch to update waist value component based on gender
     public String[] getWaist(String gender) {
         String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
         String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
@@ -289,7 +292,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // AGE POINTS CALCULATION
+
+    // Age Points Calculation Method
     public int calculateAgePoints(String gender) {
         ageSpinner = (Spinner) findViewById(R.id.ageinput);
         String ageRangeSelected = ageSpinner.getSelectedItem().toString();
@@ -381,7 +385,8 @@ public class MainActivity extends AppCompatActivity {
         return agePoints;
     }
 
-    // HDL POINTS CALCULATION
+
+    // HDL Points Calculation Method
     public int calculateHDLPoints(String gender) {
         hdlSpinner = (Spinner) findViewById(R.id.hdlinput);
         String hdlRangeSelected = hdlSpinner.getSelectedItem().toString();
@@ -444,7 +449,8 @@ public class MainActivity extends AppCompatActivity {
         return hdlPoints;
     }
 
-    // TOTAL DL POINTS CALCULATION
+
+    // Total DL Points Calculation Method
     public int calculateTotalDLPoints(String gender) {
         totaldlSpinner = (Spinner) findViewById(R.id.totaldlinput);
         String totaldlRangeSelected = totaldlSpinner.getSelectedItem().toString();
@@ -506,7 +512,8 @@ public class MainActivity extends AppCompatActivity {
         return totaldlPoints;
     }
 
-    // TA POINTS CALCULATION
+
+    // TA Points Calculation Method
     public int calculateTAPoints(String gender) {
         taSpinner = (Spinner) findViewById(R.id.tainput);
         String taRangeSelected = taSpinner.getSelectedItem().toString();
@@ -637,14 +644,14 @@ public class MainActivity extends AppCompatActivity {
         return taPoints;
     }
 
+
+    // Smoking Points Calculation Method
     public int calculateSmokingPoints(String gender) {
         Button smokerButton = this.<Button>findViewById(R.id.smokerinput);
         String smokerButtonCurrentState = smokerButton.getText().toString();
         int smokingpoints = 0;
-        //Log.d("Smoking PreConditional", genderButtonCurrentState);
         if(smokerButtonCurrentState.equals("No")) {
             smokingpoints = 0;
-            //Log.d("Smoking 1st Conditional", genderButtonCurrentState);
         }
         else if(smokerButtonCurrentState.equals("Si")) {
             switch(gender) {
@@ -656,13 +663,9 @@ public class MainActivity extends AppCompatActivity {
         }
         return smokingpoints;
     }
-    public void closeBottomSheet(View view) {
-        View bottomSheet = findViewById(R.id.bottom_sheet);
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
 
-    // CVD Calculation
+
+    // CVD Calculation Method
     public String calculateCVD(int Score, String gender) {
         String cvd = "0";
         if(gender.equals("Hombre")) {
@@ -674,7 +677,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return cvd;
     }
-
 
     private String calculateMenCVD(int Score){
         String cvd = "0%";
@@ -884,7 +886,8 @@ public class MainActivity extends AppCompatActivity {
         return cvd;
     }
 
-    // Heart Age Calculation
+
+    // Heart Age Calculation Method
     public String calculateHeartAge(int Score, String gender) {
         String heartage = "0";
         if(gender.equals("Hombre")) {
@@ -896,7 +899,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return heartage;
     }
-
 
     private String calculateMenHeartAge(int Score){
         String heartage = "30";
@@ -1106,7 +1108,8 @@ public class MainActivity extends AppCompatActivity {
         return heartage;
     }
 
-    // Risk Level Calculation
+
+    // Risk Level Calculation Method
     public String calculateRiskLevel(int Score, String gender) {
         String risklevel = "Unknown";
         if(gender.equals("Hombre")) {
@@ -1153,6 +1156,8 @@ public class MainActivity extends AppCompatActivity {
         return risklevel;
     }
 
+
+    // Method that calculates if patient needs treatment and of what kind
     public String needsTreatment(String risklevel, String gender, int agePoints, int hdlPoints, int smokingPoints){
         String needstreatment = "Unknown";
 
@@ -1164,7 +1169,6 @@ public class MainActivity extends AppCompatActivity {
 
         ldlSpinner = (Spinner) findViewById(R.id.ldlinput);
         String ldlRangeSelected = ldlSpinner.getSelectedItem().toString();
-        Log.d("ldl", ldlRangeSelected);
 
         switch(risklevel) {
             case "Low":
@@ -1184,7 +1188,6 @@ public class MainActivity extends AppCompatActivity {
                         "ACR > 3 mg/mmol\n";}
                 break;
             case "Intermediate":
-                Log.d("intermediate switch", ldlRangeSelected);
                 if (
                         (gender.equals("Hombre") && agePoints >= 8 && (    hdlPoints == 2 ||
                                 smokingPoints > 1 ||
@@ -1222,7 +1225,11 @@ public class MainActivity extends AppCompatActivity {
         return needstreatment;
         }
 
-
-
+    // Close Bottom Sheet Method
+    public void closeBottomSheet(View view) {
+        View bottomSheet = findViewById(R.id.bottom_sheet);
+        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
 
 }
