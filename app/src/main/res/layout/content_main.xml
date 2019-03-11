@@ -350,7 +350,9 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
-
+            <Space
+                android:layout_width="1dp"
+                android:layout_height="50dp"/>
         </LinearLayout>
     </ScrollView>
 

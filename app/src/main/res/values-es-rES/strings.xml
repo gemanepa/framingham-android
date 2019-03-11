@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Framingham</string>
+    <string name="action_settings">Configuracion</string>
+    <string name="gender">Genero</string>
+    <string name="man">Hombre</string>
+    <string name="woman">Mujer</string>
+    <string name="age">Edad</string>
+    <string name="colesterol_hdl">Colesterol HDL (mg/dl)</string>
+    <string name="colesterol_ldl">Colesterol LDL (mg/dl)</string>
+    <string name="colesterol_total">Colesterol Total (mg/dl)</string>
+    <string name="arterial_pression">Presion Arterial Sistolica (mmHg)</string>
+    <string name="waist_circumference">Circunferencia de Cintura</string>
+    <string name="smoking">Tabaquismo</string>
+    <string name="diabetes">Diabetes o Glucemia alta en ayunas</string>
+    <string name="hypertension_in_treatment">Hipertension en tratamiento</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="exit">Salir</string>
+    <string name="exitquestion">Salir de aplicacion?</string>
+    <string name="unknown">Desconocido</string>
+    <string name="low">Bajo</string>
+    <string name="intermediate">Intermedio</string>
+    <string name="high">Alto</string>
+    <string name="score">Puntuacion</string>
+    <string name="cvd">RCV</string>
+    <string name="cvdexplanation">RCV: Riesgo CardioVascular en 10 años</string>
+    <string name="heartage">Edad Corazon</string>
+    <string name="risk">Riesgo</string>
+    <string name="treatment">Tratamiento:</string>
+    <string name="treatment_low_diabetes">Si bien el nivel de riesgo es Bajo, el paciente requiere tratamiento de estatinas debido a la presencia de diabetes o glucemia alta en ayunas en una persona mayor de 40 años</string>
+    <string name="patient_not_requires_treatment">El paciente no requiere tratamiento.</string>
+    <string name="patient_highly_requires_treatment">El paciente necesita tratamiento</string>
+    <string name="statins_only_indicated">Estatinas solo indicadas en caso de:</string>
+    <string name="aterosclerosis">Aterosclerosis Clinica</string>
+    <string name="abdominal_aortic_aneurysm">Aneurisma Aortico Abdominal</string>
+    <string name="chronic_kidney_disease">Enfermedad Renal Cronica</string>
+    <string name="years">años</string>
+    <string name="treatment_intermediate_hasfactors">Si bien el nivel de riesgo no es Alto, el paciente presenta factores de riesgo debido a su edad por lo que se recomienda tratamiento</string>
+    <string name="treatment_intermediate_ldl">Si bien el nivel de riesgo no es Alto, el paciente presenta niveles altos de LDL y se recomienda tratamiento</string>
+    <string name="treatment_intermediate_norisks">Si bien el nivel de riesgo no es Bajo, el paciente no presenta factores de riesgo por lo que generalmente no requiere tratamiento</string>
+    <string name="primary_target">Objetivo Primario</string>
+    <string name="alternative_target">Objetivo Alternativo</string>
+    <string name="decrease_in">disminucion en</string>
+    <string name="or">o</string>
+</resources>

@@ -22,12 +22,12 @@
     <string name="low">Low</string>
     <string name="intermediate">Intermediate</string>
     <string name="high">High</string>
-    <string name="score">Score:</string>
-    <string name="cvd">CVD:</string>
-    <string name="cvdexplanation">*CVD: CardioVascular Disease Risk in 10 years</string>
-    <string name="heartage">Heart Age:</string>
+    <string name="score">Score</string>
+    <string name="cvd">CVD</string>
+    <string name="cvdexplanation">CVD: CardioVascular Disease Risk in 10 years</string>
+    <string name="heartage">Heart Age</string>
     <string name="risk">Risk</string>
-    <string name="treatment">Treatment</string>
+    <string name="treatment">Treatment:</string>
     <string name="treatment_low_diabetes">Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person</string>
     <string name="patient_not_requires_treatment">Patient not requires treatment.</string>
     <string name="statins_only_indicated">Statins only indicated in case of:</string>

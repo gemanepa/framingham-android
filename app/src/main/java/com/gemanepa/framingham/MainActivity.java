@@ -58,6 +58,12 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String scoreDictionary = getResources().getString(R.string.score);
+                String cvdDictionary = getResources().getString(R.string.cvd);
+                String cvdexplanationDictionary = getResources().getString(R.string.cvdexplanation);
+                String heartageDictionary = getResources().getString(R.string.heartage);
+                String riskDictionary = getResources().getString(R.string.risk);
+
                 //Init bottom sheet
                 View bottomSheet = findViewById(R.id.bottom_sheet);
 
@@ -84,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Total Score rendering
                     TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
-                    bottomsheetScoreText.setText("Score: " + scoreString);
+                    bottomsheetScoreText.setText(scoreDictionary+": " + scoreString);
 
 
                     // CVD calculation
@@ -92,10 +98,10 @@ public class MainActivity extends AppCompatActivity {
 
                     // CVD rendering
                     TextView bottomsheetCVDText = findViewById(R.id.bottomsheetCVDText);
-                    bottomsheetCVDText.setText("CVD: " + cvd);
+                    bottomsheetCVDText.setText(cvdDictionary+": " + cvd);
 
                     TextView bottomsheetCVDExplanationText = findViewById(R.id.bottomsheetCVDExplanationText);
-                    bottomsheetCVDExplanationText.setText("*" + "CVD: CardioVascular Disease Risk in 10 years");
+                    bottomsheetCVDExplanationText.setText("*" + cvdexplanationDictionary);
 
 
                     // Heart Age calculation
@@ -103,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Heart Age rendering
                     TextView bottomsheetHeartAgeText = findViewById(R.id.bottomsheetHeartAgeText);
-                    bottomsheetHeartAgeText.setText("Heart Age: " + heartage);
+                    bottomsheetHeartAgeText.setText(heartageDictionary+": " + heartage);
 
 
                     // Risk Level Calculation
@@ -111,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Risk Level Rendering
                     TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText);
-                    bottomsheetRiskLevelText.setText("Risk: " + risklevel);
+                    bottomsheetRiskLevelText.setText(riskDictionary+": " + risklevel);
 
 
                     // ¿Needs treatment? Calculation
@@ -1275,13 +1281,13 @@ public class MainActivity extends AppCompatActivity {
                     needstreatment = treatmentLowDiabetes;
                 } else {
                     needstreatment = patientnotrequirestreatment + "\n" +
-                            statinsonlyindicated + "\n" +
-                            "• "+ clinicalatherosclerosis +"\n" +
-                            "• "+ aorticaneurysm +"\n" +
-                            "• "+ chronickidneydisease +"\n" +
-                            "("+age+" ≥ 50 "+years+")\n" +
-                            "eGFR <60 mL/min/1.73 m2 or\n" +
-                            "ACR > 3 mg/mmol\n";
+                            statinsonlyindicated + " " +
+                            clinicalatherosclerosis +", " +
+                            aorticaneurysm +", & " +
+                            chronickidneydisease +" " +
+                            "("+age+" ≥ 50 "+years+" + " +
+                            "eGFR <60 mL/min/1.73 m2 or " +
+                            "ACR > 3 mg/mmol)";
                 }
             }
             else if(risklevel.equals(intermediate)) {
@@ -1322,6 +1328,10 @@ public class MainActivity extends AppCompatActivity {
 
     // Close Bottom Sheet Method
     public void closeBottomSheet(View view) {
+        // Changing floating button icon
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setImageResource(android.R.drawable.ic_menu_send);
+
         View bottomSheet = findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);

@@ -21,12 +21,12 @@
     <string name="low">Bajo</string>
     <string name="intermediate">Intermedio</string>
     <string name="high">Alto</string>
-    <string name="score">Puntuacion:</string>
-    <string name="cvd">RCV:</string>
-    <string name="cvdexplanation">*RCV: Riesgo CardioVascular en 10 años</string>
-    <string name="heartage">Edad del Corazon:</string>
+    <string name="score">Puntuacion</string>
+    <string name="cvd">RCV</string>
+    <string name="cvdexplanation">RCV: Riesgo CardioVascular en 10 años</string>
+    <string name="heartage">Edad Corazon</string>
     <string name="risk">Riesgo</string>
-    <string name="treatment">Tratamiento</string>
+    <string name="treatment">Tratamiento:</string>
     <string name="treatment_low_diabetes">Si bien el nivel de riesgo es Bajo, el paciente requiere tratamiento de estatinas debido a la presencia de diabetes o glucemia alta en ayunas en una persona mayor de 40 años</string>
     <string name="patient_not_requires_treatment">El paciente no requiere tratamiento.</string>
     <string name="patient_highly_requires_treatment">El paciente necesita tratamiento</string>
