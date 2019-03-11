@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Framingham</string>
+    <string name="action_settings">Settings</string>
+    <string name="gender">Gender</string>
+    <string name="man">Man</string>
+    <string name="woman">Woman</string>
+    <string name="age">Age</string>
+    <string name="colesterol_hdl">HDL Cholesterol (mg/dl)</string>
+    <string name="colesterol_ldl">LDL Cholesterol (mg/dl)</string>
+    <string name="colesterol_total">Total Cholesterol (mg/dl)</string>
+    <string name="arterial_pression">Systolic Arterial Pressure</string>
+    <string name="waist_circumference">Waist Circumference</string>
+    <string name="smoking">Smoker</string>
+    <string name="diabetes">Diabetes or Impaired fasting glucose</string>
+    <string name="hypertension_in_treatment">Hypertension under treatment</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="exit">Exit</string>
+    <string name="exitquestion">Exit application?</string>
+    <string name="unknown">Unknown</string>
+    <string name="low">Low</string>
+    <string name="intermediate">Intermediate</string>
+    <string name="high">High</string>
+    <string name="score">Score:</string>
+    <string name="cvd">CVD:</string>
+    <string name="cvdexplanation">*CVD: CardioVascular Disease Risk in 10 years</string>
+    <string name="heartage">Heart Age:</string>
+    <string name="risk">Risk</string>
+    <string name="treatment">Treatment</string>
+    <string name="treatment_low_diabetes">Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person</string>
+    <string name="patient_not_requires_treatment">Patient not requires treatment.</string>
+    <string name="statins_only_indicated">Statins only indicated in case of:</string>
+    <string name="aterosclerosis">Clinical Atherosclerosis</string>
+    <string name="abdominal_aortic_aneurysm">Abdominal Aortic Aneurysm</string>
+    <string name="chronic_kidney_disease">Chronic Kidney Disease</string>
+    <string name="years">years</string>
+    <string name="treatment_intermediate_hasfactors">While Risk Level is not High, the patient presents risk factors for its age and treatment is recommended</string>
+    <string name="treatment_intermediate_ldl">While Risk Level is not High, high levels of LDL are present and treatment is recommended</string>
+    <string name="treatment_intermediate_norisks">While Risk Level is not Low, the patient presents no risk factors for its age and would generally require no meds treatment</string>
+    <string name="patient_highly_requires_treatment">Patient highly requires treatment</string>
+    <string name="primary_target">Primary Target</string>
+    <string name="alternative_target">Alternative Target</string>
+    <string name="decrease_in">decrease in</string>
+    <string name="or">or</string>
+</resources>

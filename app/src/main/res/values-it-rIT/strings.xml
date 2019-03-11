@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Framingham</string>
+    <string name="colesterol_hdl">Colesterolo HDL (mg/dl)</string>
+    <string name="colesterol_ldl">Colesterolo LDL (mg/dl)</string>
+    <string name="colesterol_total">Colesterolo Totale (mg/dl)</string>
+    <string name="action_settings">Configurazione</string>
+    <string name="gender">Genere</string>
+    <string name="man">Uomo</string>
+    <string name="woman">Donna</string>
+    <string name="age">Età</string>
+    <string name="hypertension_in_treatment">Ipertensione sotto trattamento</string>
+    <string name="diabetes">Diabete o Alterata glicemia a digiuno</string>
+    <string name="arterial_pression">Pressione Sanguigna Sistolica</string>
+    <string name="waist_circumference">Taglia della Cintura</string>
+    <string name="smoking">Tabagismo</string>
+    <string name="yes">Sì</string>
+    <string name="no">Non</string>
+    <string name="exit">Uscire</string>
+    <string name="exitquestion">Uscire dall\'app?</string>
+    <string name="unknown">Sconosciuto</string>
+    <string name="low">Basso</string>
+    <string name="intermediate">Intermedio</string>
+    <string name="high">Elevato</string>
+    <string name="score">Punti:</string>
+    <string name="cvdexplanation">*Rischio CardioVascolare a 10 anni</string>
+    <string name="cvd">RCV:</string>
+    <string name="heartage">Età Cardiaca:</string>
+    <string name="risk">Rischio:</string>
+    <string name="treatment">Trattamento</string>
+    <string name="primary_target">Obiettivo Primario</string>
+    <string name="alternative_target">Obiettivo Alternativo</string>
+    <string name="decrease_in">diminuzione di</string>
+    <string name="or">o</string>
+    <string name="patient_highly_requires_treatment">Il paziente richiede trattamento</string>
+    <string name="patient_not_requires_treatment">Il paziente non richiede trattamento</string>
+    <string name="statins_only_indicated">Le statine sono indicate solo in caso di</string>
+    <string name="aterosclerosis">Aterosclerosi clinica</string>
+    <string name="abdominal_aortic_aneurysm">Aneurisma dell\'aorta addominale</string>
+    <string name="chronic_kidney_disease">Malattia renale cronica</string>
+    <string name="years">anni</string>
+    <string name="treatment_low_diabetes">Sebbene il livello di rischio sia basso, i pazienti necessitano di una terapia con statine perché la presenza di diabete o di alterata glicemia a digiuno nei soggetti di età superiore ai 40 anni è considerata un fattore di rischio.</string>
+</resources>

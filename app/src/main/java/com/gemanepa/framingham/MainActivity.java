@@ -207,16 +207,22 @@ public class MainActivity extends AppCompatActivity {
         //init alert dialog
         final AlertDialog.Builder builder =  new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle("Exit");
-        builder.setMessage("Are you sure you want to leave?");
+
+        String exit = getResources().getString(R.string.exit);
+        String exitquestion = getResources().getString(R.string.exitquestion);
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+
+        builder.setTitle(exit);
+        builder.setMessage(exitquestion);
         //set listeners for dialog buttons
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //finish the activity
                 finish();
             }
 	        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 //dialog gone
                 dialog.dismiss();
@@ -231,12 +237,17 @@ public class MainActivity extends AppCompatActivity {
     public void genderSwitch(View view) {
         Button genderButton = this.<Button>findViewById(R.id.genderinput);
         String genderButtonCurrentState = genderButton.getText().toString();
-        if(genderButtonCurrentState.equals("Hombre")) {
-            genderButton.setText("Mujer");
+
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
+        if(genderButtonCurrentState.equals(man)) {
+            genderButton.setText(woman);
         }
-        else if(genderButtonCurrentState.equals("Mujer")) {
-            genderButton.setText("Hombre");
+        else if(genderButtonCurrentState.equals(woman)) {
+            genderButton.setText(man);
         }
+
         waistSpinner = (Spinner) findViewById(R.id.waistinput);
         String [] waistRanges = getWaist(genderButtonCurrentState);
         ArrayAdapter<String> waistAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, waistRanges);
@@ -247,14 +258,16 @@ public class MainActivity extends AppCompatActivity {
         String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
         String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
         String [] womenWaist = {"-", "< 88cm (35inches)", "> 88cm (35inches)"};
-        String stringed = waist.toString();
-        switch(gender) {
-            case "Hombre":
-                waist = womenWaist;
-                break;
-            case "Mujer":
-                waist = menWaist;
-                break;
+
+
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
+        if (gender.equals(man)) {
+            waist = womenWaist;
+        }
+        else if (gender.equals(woman)) {
+            waist = menWaist;
         }
         return waist;
     }
@@ -262,33 +275,45 @@ public class MainActivity extends AppCompatActivity {
     public void smokingSwitch(View view) {
         Button smokerButton = this.<Button>findViewById(R.id.smokerinput);
         String smokerButtonCurrentState = smokerButton.getText().toString();
-        if(smokerButtonCurrentState.equals("No")) {
-            smokerButton.setText("Si");
+
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+
+        if(smokerButtonCurrentState.equals(no)) {
+            smokerButton.setText(yes);
         }
-        else if(smokerButtonCurrentState.equals("Si")) {
-            smokerButton.setText("No");
+        else if(smokerButtonCurrentState.equals(yes)) {
+            smokerButton.setText(no);
         }
     }
 
     public void diabetesSwitch(View view) {
         Button diabetesButton = this.<Button>findViewById(R.id.diabetesinput);
         String diabetesButtonCurrentState = diabetesButton.getText().toString();
-        if(diabetesButtonCurrentState.equals("No")) {
-            diabetesButton.setText("Si");
+
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+
+        if(diabetesButtonCurrentState.equals(no)) {
+            diabetesButton.setText(yes);
         }
-        else if(diabetesButtonCurrentState.equals("Si")) {
-            diabetesButton.setText("No");
+        else if(diabetesButtonCurrentState.equals(yes)) {
+            diabetesButton.setText(no);
         }
     }
 
     public void treatmentSwitch(View view) {
         Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
         String treatmentButtonCurrentState = treatmentButton.getText().toString();
-        if(treatmentButtonCurrentState.equals("No")) {
-            treatmentButton.setText("Si");
+
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+
+        if(treatmentButtonCurrentState.equals(no)) {
+            treatmentButton.setText(yes);
         }
-        else if(treatmentButtonCurrentState.equals("Si")) {
-            treatmentButton.setText("No");
+        else if(treatmentButtonCurrentState.equals(yes)) {
+            treatmentButton.setText(no);
         }
     }
 
@@ -298,12 +323,15 @@ public class MainActivity extends AppCompatActivity {
         ageSpinner = (Spinner) findViewById(R.id.ageinput);
         String ageRangeSelected = ageSpinner.getSelectedItem().toString();
 
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
         int agePoints = 0;
-        if(gender.equals("Hombre")) {
+        if(gender.equals(man)) {
             agePoints = calculateMenAgePoints(ageRangeSelected);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             agePoints = calculateWomenAgePoints(ageRangeSelected);
         }
         return agePoints;
@@ -391,13 +419,16 @@ public class MainActivity extends AppCompatActivity {
         hdlSpinner = (Spinner) findViewById(R.id.hdlinput);
         String hdlRangeSelected = hdlSpinner.getSelectedItem().toString();
 
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
         int HDLPoints = 0;
 
-        if(gender.equals("Hombre")) {
+        if(gender.equals(man)) {
             HDLPoints = calculateMenHDLPoints(hdlRangeSelected);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             HDLPoints = calculateWomenHDLPoints(hdlRangeSelected);
         }
         return HDLPoints;
@@ -455,12 +486,15 @@ public class MainActivity extends AppCompatActivity {
         totaldlSpinner = (Spinner) findViewById(R.id.totaldlinput);
         String totaldlRangeSelected = totaldlSpinner.getSelectedItem().toString();
 
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
         int totalDLPoints = 0;
-        if(gender.equals("Hombre")) {
+        if(gender.equals(man)) {
             totalDLPoints = calculateMenTotalDLPoints(totaldlRangeSelected);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             totalDLPoints = calculateWomenTotalDLPoints(totaldlRangeSelected);
         }
         return totalDLPoints;
@@ -521,12 +555,15 @@ public class MainActivity extends AppCompatActivity {
         Button treatmentButton = this.<Button>findViewById(R.id.treatmentinput);
         String isOnTreatment = treatmentButton.getText().toString();
 
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
         int taPoints = 0;
-        if(gender.equals("Hombre")) {
+        if(gender.equals(man)) {
             taPoints = calculateMenTotalTAPoints(taRangeSelected, isOnTreatment);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             taPoints = calculateWomenTotalTAPoints(taRangeSelected, isOnTreatment);
         }
         return taPoints;
@@ -535,52 +572,55 @@ public class MainActivity extends AppCompatActivity {
     private int calculateMenTotalTAPoints(String taRangeSelected, String isOnTreatment){
         int taPoints = 0;
 
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+
         switch(taRangeSelected) {
             case "< 120":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = -2;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 0;
                 }
                 break;
             case "120 - 129":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 0;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 2;
                 }
                 break;
             case "130 - 139":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 1;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 3;
                 }
                 break;
             case "140 - 149":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 2;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 4;
                 }
                 break;
             case "150 - 159":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 2;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 4;
                 }
                 break;
             case "160+":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 3;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 5;
                 }
                 break;
@@ -591,52 +631,55 @@ public class MainActivity extends AppCompatActivity {
     private int calculateWomenTotalTAPoints(String taRangeSelected, String isOnTreatment){
         int taPoints = 0;
 
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+
         switch(taRangeSelected) {
             case "< 120":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = -3;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = -1;
                 }
                 break;
             case "120 - 129":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 0;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 2;
                 }
                 break;
             case "130 - 139":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 1;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 3;
                 }
                 break;
             case "140 - 149":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 2;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 5;
                 }
                 break;
             case "150 - 159":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 4;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 6;
                 }
                 break;
             case "160+":
-                if(isOnTreatment.equals("No")) {
+                if(isOnTreatment.equals(no)) {
                     taPoints = 5;
                 }
-                if(isOnTreatment.equals("Si")) {
+                if(isOnTreatment.equals(yes)) {
                     taPoints = 7;
                 }
                 break;
@@ -650,15 +693,21 @@ public class MainActivity extends AppCompatActivity {
         Button smokerButton = this.<Button>findViewById(R.id.smokerinput);
         String smokerButtonCurrentState = smokerButton.getText().toString();
         int smokingpoints = 0;
-        if(smokerButtonCurrentState.equals("No")) {
+
+        String yes = getResources().getString(R.string.yes);
+        String no = getResources().getString(R.string.no);
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
+        if(smokerButtonCurrentState.equals(no)) {
             smokingpoints = 0;
         }
-        else if(smokerButtonCurrentState.equals("Si")) {
-            switch(gender) {
-                case "Hombre":
-                    smokingpoints = 4;
-                case "Mujer":
-                    smokingpoints = 3;
+        else if(smokerButtonCurrentState.equals(yes)) {
+            if(gender.equals(man)) {
+                smokingpoints = 4;
+            }
+            else if(gender.equals(woman)) {
+                smokingpoints = 3;
             }
         }
         return smokingpoints;
@@ -668,11 +717,15 @@ public class MainActivity extends AppCompatActivity {
     // CVD Calculation Method
     public String calculateCVD(int Score, String gender) {
         String cvd = "0";
-        if(gender.equals("Hombre")) {
+
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
+        if(gender.equals(man)) {
             cvd = calculateMenCVD(Score);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             cvd = calculateWomenCVD(Score);
         }
         return cvd;
@@ -890,11 +943,15 @@ public class MainActivity extends AppCompatActivity {
     // Heart Age Calculation Method
     public String calculateHeartAge(int Score, String gender) {
         String heartage = "0";
-        if(gender.equals("Hombre")) {
+
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+
+        if(gender.equals(man)) {
             heartage = calculateMenHeartAge(Score);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             heartage = calculateWomenHeartAge(Score);
         }
         return heartage;
@@ -1111,47 +1168,63 @@ public class MainActivity extends AppCompatActivity {
 
     // Risk Level Calculation Method
     public String calculateRiskLevel(int Score, String gender) {
-        String risklevel = "Unknown";
-        if(gender.equals("Hombre")) {
+
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+        String unknown = getResources().getString(R.string.unknown);
+
+        String risklevel = unknown;
+        if(gender.equals(man)) {
             risklevel = calculateMenRiskLevel(Score);
         }
 
-        else if(gender.equals("Mujer")) {
+        else if(gender.equals(woman)) {
             risklevel = calculateWomenRiskLevel(Score);
         }
         return risklevel;
     }
 
     private String calculateMenRiskLevel(int Score){
-        String risklevel = "Unknown";
+
+        String unknown = getResources().getString(R.string.unknown);
+        String low = getResources().getString(R.string.low);
+        String intermediate = getResources().getString(R.string.intermediate);
+        String high = getResources().getString(R.string.high);
+
+        String risklevel = unknown;
 
         if (Score <= 10) {
-            risklevel = "Low";
+            risklevel = low;
         }
 
         else if (Score >= 11 && Score <= 14) {
-            risklevel = "Intermediate";
+            risklevel = intermediate;
         }
 
         else if (Score >= 15) {
-            risklevel = "High";
+            risklevel = high;
         }
         return risklevel;
     }
 
     private String calculateWomenRiskLevel(int Score){
-        String risklevel = "Unknown";
+        String unknown = getResources().getString(R.string.unknown);
+        String low = getResources().getString(R.string.low);
+        String intermediate = getResources().getString(R.string.intermediate);
+        String high = getResources().getString(R.string.high);
+
+        String risklevel = unknown;
 
         if (Score <= 12) {
-            risklevel = "Low";
+            risklevel = low;
         }
 
         else if (Score >= 13 && Score <= 17) {
-            risklevel = "Intermediate";
+            risklevel = intermediate;
         }
 
         else if (Score >= 18) {
-            risklevel = "High";
+            risklevel = high;
         }
         return risklevel;
     }
@@ -1159,7 +1232,30 @@ public class MainActivity extends AppCompatActivity {
 
     // Method that calculates if patient needs treatment and of what kind
     public String needsTreatment(String risklevel, String gender, int agePoints, int hdlPoints, int smokingPoints){
-        String needstreatment = "Unknown";
+        String yes = getResources().getString(R.string.yes);
+        String man = getResources().getString(R.string.man);
+        String woman = getResources().getString(R.string.woman);
+        String unknown = getResources().getString(R.string.unknown);
+        String low = getResources().getString(R.string.low);
+        String intermediate = getResources().getString(R.string.intermediate);
+        String high = getResources().getString(R.string.high);
+        String treatmentLowDiabetes = getResources().getString(R.string.treatment_low_diabetes);
+        String patientnotrequirestreatment = getResources().getString(R.string.patient_not_requires_treatment);
+        String statinsonlyindicated = getResources().getString(R.string.statins_only_indicated);
+        String clinicalatherosclerosis = getResources().getString(R.string.aterosclerosis);
+        String aorticaneurysm = getResources().getString(R.string.abdominal_aortic_aneurysm);
+        String chronickidneydisease = getResources().getString(R.string.chronic_kidney_disease);
+        String age = getResources().getString(R.string.age);
+        String years = getResources().getString(R.string.years);
+        String intermediatewithfactors = getResources().getString(R.string.treatment_intermediate_hasfactors);
+        String intermediateldl = getResources().getString(R.string.treatment_intermediate_ldl);
+        String intermediatenofactors = getResources().getString(R.string.treatment_intermediate_norisks);
+        String patientrequirestreatment = getResources().getString(R.string.patient_highly_requires_treatment);
+        String primarytarget = getResources().getString(R.string.primary_target);
+        String alternativetarget = getResources().getString(R.string.alternative_target);
+        String decreasein = getResources().getString(R.string.decrease_in);
+
+        String needstreatment = unknown;
 
         Button diabetesButton = this.<Button>findViewById(R.id.diabetesinput);
         String diabetesButtonCurrentState = diabetesButton.getText().toString();
@@ -1170,57 +1266,56 @@ public class MainActivity extends AppCompatActivity {
         ldlSpinner = (Spinner) findViewById(R.id.ldlinput);
         String ldlRangeSelected = ldlSpinner.getSelectedItem().toString();
 
-        switch(risklevel) {
-            case "Low":
+
+            if(risklevel.equals(low)) {
                 if (
-                     (gender.equals("Hombre") && agePoints >= 5 && diabetesButtonCurrentState.equals("Si")) ||
-                    (gender.equals("Mujer") && agePoints >= 4 && diabetesButtonCurrentState.equals("Si"))
+                        (gender.equals(man) && agePoints >= 5 && diabetesButtonCurrentState.equals(yes)) ||
+                                (gender.equals(woman) && agePoints >= 4 && diabetesButtonCurrentState.equals(yes))
                 ) {
-                    needstreatment = "Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person";
+                    needstreatment = treatmentLowDiabetes;
+                } else {
+                    needstreatment = patientnotrequirestreatment + "\n" +
+                            statinsonlyindicated + "\n" +
+                            "• "+ clinicalatherosclerosis +"\n" +
+                            "• "+ aorticaneurysm +"\n" +
+                            "• "+ chronickidneydisease +"\n" +
+                            "("+age+" ≥ 50 "+years+")\n" +
+                            "eGFR <60 mL/min/1.73 m2 or\n" +
+                            "ACR > 3 mg/mmol\n";
                 }
-                else {needstreatment = "Patient not requires treatment.\n" +
-                        "Statins only indicated in case of:\n"  +
-                        "• Clinical atherosclerosis\n" +
-                        "• Abdominal aortic aneurysm\n" +
-                        "• Chronic kidney disease\n" +
-                        "(age ≥ 50 years)\n" +
-                        "eGFR <60 mL/min/1.73 m2 or\n" +
-                        "ACR > 3 mg/mmol\n";}
-                break;
-            case "Intermediate":
+            }
+            else if(risklevel.equals(intermediate)) {
                 if (
-                        (gender.equals("Hombre") && agePoints >= 8 && (    hdlPoints == 2 ||
+                        (gender.equals(man) && agePoints >= 8 && (hdlPoints == 2 ||
                                 smokingPoints > 1 ||
-                                diabetesButtonCurrentState.equals("Si") ||
+                                diabetesButtonCurrentState.equals(yes) ||
                                 waistRangeSelected.equals("> 102cm (40inches)") ||
                                 waistRangeSelected.equals("> 88cm (35inches)")
                         )) ||
-                        (gender.equals("Mujer") && agePoints >= 9 && (    hdlPoints == 2 ||
-                                smokingPoints > 1 ||
-                                diabetesButtonCurrentState.equals("Si") ||
-                                waistRangeSelected.equals("> 102cm (40inches)") ||
-                                waistRangeSelected.equals("> 88cm (35inches)")
-                        ))
+                                (gender.equals(woman) && agePoints >= 9 && (hdlPoints == 2 ||
+                                        smokingPoints > 1 ||
+                                        diabetesButtonCurrentState.equals(yes) ||
+                                        waistRangeSelected.equals("> 102cm (40inches)") ||
+                                        waistRangeSelected.equals("> 88cm (35inches)")
+                                ))
                 ) {
-                        needstreatment = "While Risk Level is not High, the patient presents risk factors for its age and requires treatment";
+                    needstreatment = intermediatewithfactors;
 
+                } else if (ldlRangeSelected.equals("> 135.0")) {
+                    needstreatment = intermediateldl;
+                } else {
+                    needstreatment = intermediatenofactors;
                 }
-                else if (ldlRangeSelected.equals("> 135.0")) {
-                    needstreatment = "While Risk Level is not High, the patient requires treatment due to inappropriate high levels of LDL";
-                }
-                else {
-                    needstreatment = "While Risk Level is not Low, the patient presents no risk factors for its age and would generally require no meds treatment";
-                }
-            break;
+            }
 
-            case "High":
-                needstreatment = "• Patient highly requires treatment\n" +
-                        "• Primary Target: ≤2 mmol/L or ≥50% decrease in LDL-C\n" +
-                        "• Alternative Target: Apo B ≤0.8 g/L\n" +
-                        "• Alternative Target: Non-HDL-C ≤2.6 mmol/L\n";
+            else if (risklevel.equals(high)) {
+                needstreatment = "• "+patientrequirestreatment+"\n" +
+                        "• "+primarytarget+": ≤2 mmol/L or ≥50% "+decreasein+" LDL-C\n" +
+                        "• "+alternativetarget+": Apo B ≤0.8 g/L\n" +
+                        "• "+alternativetarget+": Non-HDL-C ≤2.6 mmol/L\n";
                 ;
-                break;
-        }
+            }
+
 
         return needstreatment;
         }

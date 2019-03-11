@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Framingham</string>
+    <string name="smoking">Tabagismo</string>
+    <string name="action_settings">Configuração</string>
+    <string name="gender">Gênero</string>
+    <string name="man">Homen</string>
+    <string name="woman">Mulher</string>
+    <string name="age">Idade</string>
+    <string name="colesterol_hdl">Colesterol HDL (mg/dl)</string>
+    <string name="colesterol_ldl">Colesterol LDL (mg/dl)</string>
+    <string name="colesterol_total">Colesterol Total (mg/dl)</string>
+    <string name="arterial_pression">Pressão Arterial Sistólica</string>
+    <string name="waist_circumference">Circunferência da Cintura</string>
+    <string name="diabetes">Diabetes ou Anomalia da glicemia em jejum</string>
+    <string name="hypertension_in_treatment">Hipertensão sob tratamento</string>
+    <string name="yes">Sim</string>
+    <string name="exit">Sair</string>
+    <string name="no">Não</string>
+    <string name="exitquestion">Sair do app</string>
+    <string name="unknown">Desconhecido</string>
+    <string name="low">Baixo</string>
+    <string name="intermediate">Intermédio</string>
+    <string name="high">Alto</string>
+    <string name="score">Pontos:</string>
+    <string name="cvdexplanation">*Risco CardioVascular em 10 anos</string>
+    <string name="cvd">RCV</string>
+    <string name="heartage">Idade do Coração:</string>
+    <string name="risk">Risco:</string>
+    <string name="treatment">Tratamento:</string>
+    <string name="primary_target">Objetivo Primário</string>
+    <string name="alternative_target">Objetivo Alternativo</string>
+    <string name="decrease_in">diminuição de</string>
+    <string name="or">ou</string>
+    <string name="patient_highly_requires_treatment">Paciente requer tratamento</string>
+    <string name="patient_not_requires_treatment">Paciente não requer tratamento</string>
+    <string name="statins_only_indicated">As estatinas são indicadas apenas em caso de</string>
+    <string name="aterosclerosis">Aterosclerose Clínica</string>
+    <string name="abdominal_aortic_aneurysm">Aneurisma Aórtico Abdominal</string>
+    <string name="chronic_kidney_disease">Doença Renal Crônica</string>
+    <string name="years">anos</string>
+    <string name="treatment_low_diabetes">Embora o nível de risco seja baixo, o paciente necessita de tratamento com estatinas, pois a presença de diabetes ou anomalia da glicemia em jejum prejudicada em pessoas com mais de 40 anos é considerada um fator de risco.</string>
+</resources>
