@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Framingham</string>
+    <string name="app_name">CardioRiesgo Framingham</string>
     <string name="action_settings">Configuracion</string>
     <string name="gender">Genero</string>
     <string name="man">Hombre</string>
