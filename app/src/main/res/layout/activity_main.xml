@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="15dp"
-        android:text="Framingham Score"
+        android:text="@string/navbar_title"
         android:textColor="@android:color/background_light"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold"
         />
     </android.support.design.widget.AppBarLayout>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Framingham CardioRisk</string>
+    <string name="app_name">Framingham CR</string>
+<string name="navbar_title">Framingham CardioRisk</string>
     <string name="action_settings">Settings</string>
     <string name="gender">Gender</string>
     <string name="man">Man</string>

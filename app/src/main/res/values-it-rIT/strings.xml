@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">CardioRischio Framingham</string>
+    <string name="app_name">CR Framingham</string>
+<string name="navbar_title">CardioRischio Framingham</string>
     <string name="colesterol_hdl">Colesterolo HDL (mg/dl)</string>
     <string name="colesterol_ldl">Colesterolo LDL (mg/dl)</string>
     <string name="colesterol_total">Colesterolo Totale (mg/dl)</string>
