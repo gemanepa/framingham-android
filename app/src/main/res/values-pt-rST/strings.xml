@@ -41,7 +41,7 @@
     <string name="chronic_kidney_disease">Doença Renal Crônica</string>
     <string name="years">anos</string>
     <string name="treatment_low_diabetes">Embora o nível de risco seja baixo, o paciente necessita de tratamento com estatinas, pois a presença de diabetes ou anomalia da glicemia em jejum prejudicada em pessoas com mais de 40 anos é considerada um fator de risco.</string>
-    <string name="treatment_intermediate_hasfactors">Embora o nível de risco não seja alto, o paciente possui fatores de risco para sua idade e o tratamento é recomendado.</string>
+    <string name="treatment_intermediate_hasfactors">Embora o nível de risco não seja alto, o paciente possui fatores de risco para sua idade</string> <string name="so_treatment_is_recommended">e o tratamento é recomendado.</string>
     <string name="treatment_intermediate_ldl">Embora o nível de risco não seja alto, altos níveis de LDL estão presentes e o tratamento é recomendado.</string>
     <string name="treatment_intermediate_norisks">Embora o nível de risco não seja baixo, o paciente não apresenta fatores de risco para a idade e geralmente não necessitará de tratamento medicamentoso.</string>
 </resources>

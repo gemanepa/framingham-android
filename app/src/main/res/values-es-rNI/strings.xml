@@ -37,7 +37,7 @@
     <string name="abdominal_aortic_aneurysm">Aneurisma Aortico Abdominal</string>
     <string name="chronic_kidney_disease">Enfermedad Renal Cronica</string>
     <string name="years">años</string>
-    <string name="treatment_intermediate_hasfactors">Si bien el nivel de riesgo no es Alto, el paciente presenta factores de riesgo debido a su edad por lo que se recomienda tratamiento</string>
+    <string name="treatment_intermediate_hasfactors">Si bien el nivel de riesgo no es Alto, el paciente presenta factores de riesgo para su edad</string> <string name="so_treatment_is_recommended">por lo que se recomienda tratamiento</string>
     <string name="treatment_intermediate_ldl">Si bien el nivel de riesgo no es Alto, el paciente presenta niveles altos de LDL y se recomienda tratamiento</string>
     <string name="treatment_intermediate_norisks">Si bien el nivel de riesgo no es Bajo, el paciente no presenta factores de riesgo por lo que generalmente no requiere tratamiento</string>
     <string name="primary_target">Objetivo Primario</string>

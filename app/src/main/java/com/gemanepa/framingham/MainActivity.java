@@ -1219,6 +1219,9 @@ public class MainActivity extends AppCompatActivity {
         String yes = getResources().getString(R.string.yes);
         String man = getResources().getString(R.string.man);
         String woman = getResources().getString(R.string.woman);
+        String smoking = getResources().getString(R.string.smoking);
+        String diabetes = getResources().getString(R.string.diabetes);
+        String waistcircumference = getResources().getString(R.string.waist_circumference);
         String unknown = getResources().getString(R.string.unknown);
         String low = getResources().getString(R.string.low);
         String intermediate = getResources().getString(R.string.intermediate);
@@ -1232,12 +1235,14 @@ public class MainActivity extends AppCompatActivity {
         String age = getResources().getString(R.string.age);
         String years = getResources().getString(R.string.years);
         String intermediatewithfactors = getResources().getString(R.string.treatment_intermediate_hasfactors);
+        String sotreatmentisrecommended = getResources().getString(R.string.so_treatment_is_recommended);
         String intermediateldl = getResources().getString(R.string.treatment_intermediate_ldl);
         String intermediatenofactors = getResources().getString(R.string.treatment_intermediate_norisks);
         String patientrequirestreatment = getResources().getString(R.string.patient_highly_requires_treatment);
         String primarytarget = getResources().getString(R.string.primary_target);
         String alternativetarget = getResources().getString(R.string.alternative_target);
         String decreasein = getResources().getString(R.string.decrease_in);
+        String or = getResources().getString(R.string.or);
 
         String needstreatment = unknown;
 
@@ -1264,27 +1269,29 @@ public class MainActivity extends AppCompatActivity {
                             aorticaneurysm +", & " +
                             chronickidneydisease +" " +
                             "("+age+" ≥ 50 "+years+" + " +
-                            "eGFR <60 mL/min/1.73 m2 or " +
+                            "eGFR <60 mL/min/1.73 m2 "+or+" " +
                             "ACR > 3 mg/mmol)";
                 }
             }
             else if(risklevel.equals(intermediate)) {
-                if (
-                        (gender.equals(man) && agePoints >= 8 && (hdlPoints == 2 ||
-                                smokingPoints > 1 ||
-                                diabetesButtonCurrentState.equals(yes) ||
-                                waistRangeSelected.equals("> 102cm (40inches)") ||
-                                waistRangeSelected.equals("> 88cm (35inches)")
-                        )) ||
-                                (gender.equals(woman) && agePoints >= 9 && (hdlPoints == 2 ||
-                                        smokingPoints > 1 ||
-                                        diabetesButtonCurrentState.equals(yes) ||
-                                        waistRangeSelected.equals("> 102cm (40inches)") ||
-                                        waistRangeSelected.equals("> 88cm (35inches)")
-                                ))
-                ) {
-                    needstreatment = intermediatewithfactors;
 
+                if (
+                        (gender.equals(man) && agePoints >= 8)
+                        ||
+                        (gender.equals(woman) && agePoints >= 9)
+                ) {
+                    String hasLowHdl = "";
+                    String isSmoker = "";
+                    String hasDiabetes = "";
+                    String hasHighWaist = "";
+
+                    if (hdlPoints == 2) {hasLowHdl = low+" HDL, ";}
+                    if (smokingPoints > 1) {isSmoker = smoking+", ";}
+                    if(diabetesButtonCurrentState.equals(yes)) {hasDiabetes = diabetes+", ";}
+                    if (waistRangeSelected.equals("> 102cm (40inches)") || waistRangeSelected.equals("> 88cm (35inches)")) {hasHighWaist = waistcircumference+", ";}
+                    String factorRisks = isSmoker+hasDiabetes+hasLowHdl+hasHighWaist;
+                    factorRisks = factorRisks.substring(0, factorRisks.length() - 2);
+                    needstreatment = intermediatewithfactors + " (" +factorRisks+ ") " + sotreatmentisrecommended;
                 } else if (ldlRangeSelected.equals("> 135.0")) {
                     needstreatment = intermediateldl;
                 } else {
@@ -1294,7 +1301,7 @@ public class MainActivity extends AppCompatActivity {
 
             else if (risklevel.equals(high)) {
                 needstreatment = "• "+patientrequirestreatment+"\n" +
-                        "• "+primarytarget+": ≤2 mmol/L or ≥50% "+decreasein+" LDL-C\n" +
+                        "• "+primarytarget+": ≤2 mmol/L "+or+" ≥50% "+decreasein+" LDL-C\n" +
                         "• "+alternativetarget+": Apo B ≤0.8 g/L\n" +
                         "• "+alternativetarget+": Non-HDL-C ≤2.6 mmol/L\n";
                 ;

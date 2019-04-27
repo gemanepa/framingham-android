@@ -41,7 +41,7 @@
     <string name="chronic_kidney_disease">Malattia renale cronica</string>
     <string name="years">anni</string>
     <string name="treatment_low_diabetes">Sebbene il livello di rischio sia basso, i pazienti necessitano di una terapia con statine perché la presenza di diabete o di alterata glicemia a digiuno nei soggetti di età superiore ai 40 anni è considerata un fattore di rischio.</string>
-    <string name="treatment_intermediate_hasfactors">Sebbene il livello di rischio non sia elevato, il paziente presenta fattori di rischio per la sua età e il trattamento è raccomandato.</string>
+    <string name="treatment_intermediate_hasfactors">Sebbene il livello di rischio non sia elevato, il paziente presenta fattori di rischio per la sua età</string> <string name="so_treatment_is_recommended">e il trattamento è raccomandato.</string>
     <string name="treatment_intermediate_ldl">Sebbene il livello di rischio non sia elevato, sono presenti livelli elevati di LDL e si raccomanda il trattamento</string>
     <string name="treatment_intermediate_norisks">Sebbene il livello di rischio non sia basso, il paziente non presenta fattori di rischio per la sua età e generalmente non richiede trattamenti medici</string>
 </resources>
