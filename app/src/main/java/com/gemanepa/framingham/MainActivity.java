@@ -1276,9 +1276,18 @@ public class MainActivity extends AppCompatActivity {
             else if(risklevel.equals(intermediate)) {
 
                 if (
-                        (gender.equals(man) && agePoints >= 8)
-                        ||
-                        (gender.equals(woman) && agePoints >= 9)
+                        (gender.equals(man) && agePoints >= 8 && (hdlPoints == 2 ||
+                                smokingPoints > 1 ||
+                                diabetesButtonCurrentState.equals(yes) ||
+                                waistRangeSelected.equals("> 102cm (40inches)") ||
+                                waistRangeSelected.equals("> 88cm (35inches)")
+                        )) ||
+                                (gender.equals(woman) && agePoints >= 9 && (hdlPoints == 2 ||
+                                        smokingPoints > 1 ||
+                                        diabetesButtonCurrentState.equals(yes) ||
+                                        waistRangeSelected.equals("> 102cm (40inches)") ||
+                                        waistRangeSelected.equals("> 88cm (35inches)")
+                                ))
                 ) {
                     String hasLowHdl = "";
                     String isSmoker = "";
