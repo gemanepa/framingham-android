@@ -17,7 +17,7 @@
     <string name="hypertension_in_treatment">Hypertension under treatment</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="exit">Exit</string>
+    <string name="exit">Exit</string><string name="cancel">Cancel</string>
     <string name="exitquestion">Exit application?</string>
     <string name="unknown">Unknown</string>
     <string name="low">Low</string>
@@ -29,8 +29,8 @@
     <string name="heartage">Heart Age</string>
     <string name="risk">Risk</string>
     <string name="treatment">Treatment:</string>
-    <string name="treatment_low_diabetes">Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person</string>
-    <string name="patient_not_requires_treatment">Patient not requires treatment.</string>
+    <string name="treatment_low_diabetes">Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person</string><string name="patient">Patient</string>
+    <string name="patient_name">Patient\'s Name</string><string name="patient_not_requires_treatment">Patient not requires treatment.</string>
     <string name="statins_only_indicated">Statins only indicated in case of:</string>
     <string name="aterosclerosis">Clinical Atherosclerosis</string>
     <string name="abdominal_aortic_aneurysm">Abdominal Aortic Aneurysm</string>
@@ -42,6 +42,6 @@
     <string name="patient_highly_requires_treatment">Patient highly requires treatment</string>
     <string name="primary_target">Primary Target</string>
     <string name="alternative_target">Alternative Target</string>
-    <string name="decrease_in">decrease in</string>
+    <string name="decrease_in">decrease in</string><string name="optional">optional</string><string name="continuar">Continue</string> <string name="close">Close</string> <string name="view">View</string> <string name="send">Send</string> <string name="nopdfreader">No pdf reader/viewer app detected</string> <string name="gotoplaystore">Go to Google Pdf Viewer app in Google Play Store?</string> <string name="pdfsuccess">PDF File successfully created</string>
     <string name="or">or</string>
 </resources>

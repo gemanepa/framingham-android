@@ -17,7 +17,7 @@
     <string name="smoking">Tabagismo</string>
     <string name="yes">Sì</string>
     <string name="no">Non</string>
-    <string name="exit">Uscire</string>
+    <string name="exit">Uscire</string><string name="cancel">Annulla</string>
     <string name="exitquestion">Uscire dall\'app?</string>
     <string name="unknown">Sconosciuto</string>
     <string name="low">Basso</string>
@@ -31,10 +31,10 @@
     <string name="treatment">Trattamento:</string>
     <string name="primary_target">Obiettivo Primario</string>
     <string name="alternative_target">Obiettivo Alternativo</string>
-    <string name="decrease_in">diminuzione di</string>
+    <string name="decrease_in">diminuzione di</string><string name="optional">opzionale</string><string name="continuar">Continuare</string> <string name="close">Chiudi finestra</string> <string name="view">Vedi file</string> <string name="send">Inviare</string> <string name="nopdfreader">App per leggere pdf non rilevato</string> <string name="gotoplaystore">Apri l\'applicazione Google PDF Viewer nel Google Play Store?</string> <string name="pdfsuccess">Archivio PDF creato con successo</string>
     <string name="or">o</string>
-    <string name="patient_highly_requires_treatment">Il paziente richiede trattamento</string>
-    <string name="patient_not_requires_treatment">Il paziente non richiede trattamento</string>
+    <string name="patient">Paziente</string><string name="patient_highly_requires_treatment">Il paziente richiede trattamento</string>
+    <string name="patient_name">Nome del Paziente</string><string name="patient_not_requires_treatment">Il paziente non richiede trattamento</string>
     <string name="statins_only_indicated">Le statine sono indicate solo in caso di</string>
     <string name="aterosclerosis">Aterosclerosi clinica</string>
     <string name="abdominal_aortic_aneurysm">Aneurisma dell\'aorta addominale</string>

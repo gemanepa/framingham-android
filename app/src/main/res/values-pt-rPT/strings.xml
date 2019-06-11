@@ -16,7 +16,7 @@
     <string name="diabetes">Diabetes ou anomalia da glicemia</string>
     <string name="hypertension_in_treatment">Hipertensão sob tratamento</string>
     <string name="yes">Sim</string>
-    <string name="exit">Sair</string>
+    <string name="exit">Sair</string><string name="cancel">Cancelar</string>
     <string name="no">Não</string>
     <string name="exitquestion">Sair do app</string>
     <string name="unknown">Desconhecido</string>
@@ -31,10 +31,10 @@
     <string name="treatment">Tratamento:</string>
     <string name="primary_target">Objetivo Primário</string>
     <string name="alternative_target">Objetivo Alternativo</string>
-    <string name="decrease_in">diminuição de</string>
+    <string name="decrease_in">diminuição de</string><string name="optional">opcional</string><string name="continuar">Continuar</string> <string name="close">Fechar</string> <string name="view">Ver</string> <string name="send">Enviar</string> <string name="nopdfreader">Nenhuma aplicação de leitor de PDF detectada</string> <string name="gotoplaystore">Ir para o aplicativo Google PDF Viewer na Google Play Store?</string> <string name="pdfsuccess">Arquivo PDF criado com sucesso</string>
     <string name="or">ou</string>
-    <string name="patient_highly_requires_treatment">Paciente requer tratamento</string>
-    <string name="patient_not_requires_treatment">Paciente não requer tratamento</string>
+    <string name="patient">Paciente</string><string name="patient_highly_requires_treatment">Paciente requer tratamento</string>
+    <string name="patient_name">Nome do Paciente</string><string name="patient_not_requires_treatment">Paciente não requer tratamento</string>
     <string name="statins_only_indicated">As estatinas são indicadas apenas em caso de</string>
     <string name="aterosclerosis">Aterosclerose Clínica</string>
     <string name="abdominal_aortic_aneurysm">Aneurisma Aórtico Abdominal</string>
