@@ -1,38 +1,9 @@
 package com.gemanepa.framingham;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.pdf.PdfDocument;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Logger;
 
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.CalendarContract;
-import android.support.v4.app.ActivityCompat;
-import android.text.InputType;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
-
-// Menu
-import android.view.Menu;
-import android.view.MenuItem;
 
 // Buttons
 import android.support.design.widget.FloatingActionButton;
@@ -52,16 +23,7 @@ import android.support.v7.widget.Toolbar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 
-// Bottom Sheet
-import android.support.design.widget.BottomSheetBehavior;
-import android.widget.TextView;
 
-// Date & Time
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-
-// Logging
-import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -71,15 +33,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner totaldlSpinner;
     Spinner waistSpinner;
     Spinner taSpinner;
-    BottomSheetBehavior mBottomSheetBehavior;
 
-    boolean isFABMenuOpen = false;
-
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,157 +42,51 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         //Init float action button
         final FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // Init Score Calculation
+                Button genderButton = findViewById(R.id.genderinput);
+                String gender = genderButton.getText().toString();
 
-                //Init bottom sheet
-                View bottomSheet = findViewById(R.id.bottom_sheet);
+                int agePoints = calculateAgePoints(gender);
+                int hdlPoints = calculateHDLPoints(gender);
+                int dlPoints = calculateTotalDLPoints(gender);
+                int taPoints = calculateTAPoints(gender);
+                int smokingPoints = calculateSmokingPoints(gender);
 
-                mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
+                // Total score
+                int score = agePoints + hdlPoints + dlPoints + taPoints + smokingPoints;
 
-                // Start calculation when pressing button only if Bottom Sheet is not expanded...
-                if(mBottomSheetBehavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                    String scoreDictionary = getResources().getString(R.string.score);
-                    String cvdDictionary = getResources().getString(R.string.cvd);
-                    String cvdexplanationDictionary = getResources().getString(R.string.cvdexplanation);
-                    String heartageDictionary = getResources().getString(R.string.heartage);
-                    String riskDictionary = getResources().getString(R.string.risk);
+                // Passing total score to String
+                String scoreString = Integer.toString(score);
 
-                    // Init Score Calculation
-                    Button genderButton = findViewById(R.id.genderinput);
-                    String gender = genderButton.getText().toString();
+                // CVD calculation
+                String cvd = calculateCVD(score, gender);
 
-                    int agePoints = calculateAgePoints(gender);
-                    int hdlPoints = calculateHDLPoints(gender);
-                    int dlPoints = calculateTotalDLPoints(gender);
-                    int taPoints = calculateTAPoints(gender);
-                    int smokingPoints = calculateSmokingPoints(gender);
+                // Heart Age calculation
+                String heartage = calculateHeartAge(score, gender);
 
-                    // Total score
-                    int score = agePoints + hdlPoints + dlPoints + taPoints + smokingPoints;
+                // Risk Level Calculation
+                String risklevel = calculateRiskLevel(score, gender);
 
-                    // Passing total score to String
-                    String scoreString = Integer.toString(score);
+                // ¿Needs treatment? Calculation
+                String needstreatment = needsTreatment(risklevel, gender, agePoints, hdlPoints, smokingPoints);
 
-                    // Total Score rendering
-                    TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
-                    bottomsheetScoreText.setText(scoreDictionary+": " + scoreString);
-
-
-                    // CVD calculation
-                    String cvd = calculateCVD(score, gender);
-
-                    // CVD rendering
-                    TextView bottomsheetCVDText = findViewById(R.id.bottomsheetCVDText);
-                    bottomsheetCVDText.setText(cvdDictionary+": " + cvd);
-
-                    TextView bottomsheetCVDExplanationText = findViewById(R.id.bottomsheetCVDExplanationText);
-                    bottomsheetCVDExplanationText.setText("*" + cvdexplanationDictionary);
-
-
-                    // Heart Age calculation
-                    String heartage = calculateHeartAge(score, gender);
-
-                    // Heart Age rendering
-                    TextView bottomsheetHeartAgeText = findViewById(R.id.bottomsheetHeartAgeText);
-                    bottomsheetHeartAgeText.setText(heartageDictionary+": " + heartage);
-
-
-                    // Risk Level Calculation
-                    String risklevel = calculateRiskLevel(score, gender);
-
-                    // Risk Level Rendering
-                    TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText);
-                    bottomsheetRiskLevelText.setText(riskDictionary+": " + risklevel);
-
-
-                    // ¿Needs treatment? Calculation
-                   String needstreatment = needsTreatment(risklevel, gender, agePoints, hdlPoints, smokingPoints);
-
-                    // ¿Needs treatment? Rendering
-                    TextView bottomsheetNeedsTreatmentText = findViewById(R.id.bottomsheetNeedsTreatmentText);
-                    bottomsheetNeedsTreatmentText.setText("" + needstreatment);
-
-                    // Changing floating button icon
-                    fab.setImageResource(android.R.drawable.ic_dialog_info);
-
-                    // Expanding bottom sheet to show data
-                    mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-                else {
-                    if(!isFABMenuOpen){
-                        showFABMenu();
-                    }else{
-                        closeFABMenu();
-                    }
-                }
-            }
-        });
-
-        // Method to collapse bottom sheet and return to data input section
-        final FloatingActionButton returnfab = (FloatingActionButton) findViewById(R.id.fab1);
-        returnfab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Changing floating button icon
-                fab.setImageResource(android.R.drawable.ic_menu_send);
-
-                // Collapsing fab menu...
-                closeFABMenu();
-
-                // Collapsing bottom sheet...
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-            }
-        });
-
-        final FloatingActionButton sharefab = (FloatingActionButton) findViewById(R.id.fab2);
-        sharefab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertStringWindow(2);
-                //shareResults();
-                //showCloseAppPopup();
-            }
-        });
-
-        final FloatingActionButton schedulefab = (FloatingActionButton) findViewById(R.id.fab3);
-        schedulefab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                insertStringWindow(3);
-                //String asdf = "THIS WOOOOOOOOOOOOOORRRKSSSSS";
-                //createPdf(asdf);
-            }
-        });
-
-        final FloatingActionButton downloadAsPdffab = (FloatingActionButton) findViewById(R.id.fab4);
-        downloadAsPdffab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //insertStringWindow(4);
-
-                int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-                if (permission != PackageManager.PERMISSION_GRANTED) {
-                    // We don't have permission so prompt the user
-                    ActivityCompat.requestPermissions(
-                            MainActivity.this,
-                            PERMISSIONS_STORAGE,
-                            REQUEST_EXTERNAL_STORAGE
-                    );
-                    insertStringWindow(4);
-                }
-                else {
-                    insertStringWindow(4);
-                }
+                Intent i = new Intent(MainActivity.this, ResultsActivity.class);
+                i.putExtra("score",scoreString);
+                i.putExtra("cvd", cvd);
+                i.putExtra("heartage",heartage);
+                i.putExtra("risklevel", risklevel);
+                i.putExtra("needstreatment", needstreatment);
+                startActivity(i);
 
             }
         });
+
 
         //Init Spinners
         ageSpinner = (Spinner) findViewById(R.id.ageinput);
@@ -281,47 +129,7 @@ public class MainActivity extends AppCompatActivity {
         showCloseAppPopup();
     }
 
-    private void insertStringWindow(final int proceedWithFeature){
-        String cancelDictionary = getResources().getString(R.string.cancel);
-        String patientnameDictionary = getResources().getString(R.string.patient_name);
-        String optionalDictionary = getResources().getString(R.string.optional);
-        String continueDictionary = getResources().getString(R.string.continuar);
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(patientnameDictionary+" ("+optionalDictionary+")");
-
-// Set up the input
-        final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
-        builder.setView(input);
-
-// Set up the buttons
-        builder.setPositiveButton(continueDictionary, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String patientName = input.getText().toString();
-
-                if (proceedWithFeature == 2) {
-                    shareResults(patientName);
-                }
-                else if (proceedWithFeature == 3) {
-                    Schedule(patientName);
-                }
-                else if (proceedWithFeature == 4) {
-                    createPdf(patientName);
-                }
-            }
-        });
-        builder.setNegativeButton(cancelDictionary, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        builder.show();
-    }
     // Method that shows an alert window asking if really stopping or not an activity
     // Invoked in onBackPressed
     private void showCloseAppPopup() {
@@ -354,136 +162,6 @@ public class MainActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void showNoAppForThatIntentPopup() {
-        //init alert dialog
-        final AlertDialog.Builder builder =  new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-
-        String yes = getResources().getString(R.string.yes);
-        String no = getResources().getString(R.string.no);
-
-        builder.setTitle(getResources().getString(R.string.nopdfreader));
-        builder.setMessage(getResources().getString(R.string.gotoplaystore));
-        //set listeners for dialog buttons
-        builder.setPositiveButton(yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                //finish the activity
-                Intent pdfviewerApp = new Intent(Intent.ACTION_VIEW);
-                pdfviewerApp.setData(Uri.parse(
-                        "https://play.google.com/store/apps/details?id=com.google.android.apps.pdfviewer"));
-                pdfviewerApp.setPackage("com.android.vending");
-                startActivity(pdfviewerApp);
-            }
-        });
-
-        builder.setNegativeButton(no, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                //dialog gone
-                dialog.dismiss();
-            }
-        });
-
-        //create the alert dialog and show it
-        builder.create().show();
-    }
-
-    private void pdfCreatedPopup(final String targetPdf, final String patientName) {
-        final AlertDialog.Builder builder =  new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-
-        String close = getResources().getString(R.string.close);
-        String view = getResources().getString(R.string.view);
-        String send = getResources().getString(R.string.send);
-
-        builder.setTitle(getResources().getString(R.string.pdfsuccess));
-        //set listeners for dialog buttons
-        builder.setPositiveButton(send, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                //finish the activity
-
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                //intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"email@example.com"});
-
-                if (patientName.length() > 1) {
-                    intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.navbar_title) + " PDF | "+patientName);
-
-                    String patientDictionary = getResources().getString(R.string.patient);
-                    intent.putExtra(Intent.EXTRA_TEXT, patientDictionary + ": "+patientName);
-                }
-                else {intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.navbar_title)+" PDF");}
-                //intent.putExtra(Intent.EXTRA_TEXT, "body text");
-                File root = Environment.getExternalStorageDirectory();
-                File file = new File(root, targetPdf);
-                if (!file.exists() || !file.canRead()) {
-                    Toast.makeText(MainActivity.this, "Error :(", Toast.LENGTH_LONG).show();
-                    finish();
-                    return;
-                }
-                Uri uri = Uri.fromFile(file);
-                Log.d("uri", String.valueOf(uri));
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
-                startActivity(Intent.createChooser(intent, "Send email..."));
-                /*
-                final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                emailIntent.setType("plain/text");
-                startActivity(emailIntent);
-                */
-            }
-        });
-
-        builder.setNegativeButton(view, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                readPdf(targetPdf);
-            }
-        });
-
-        builder.setNeutralButton(close, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                //dialog gone
-                dialog.dismiss();
-            }
-        });
-
-        //create the alert dialog and show it
-        builder.create().show();
-    }
-
-
-    private void showFABMenu(){
-        findViewById(R.id.fab1).animate().translationY(-getResources().getDimension(R.dimen.standard_60));
-        findViewById(R.id.fab2).animate().translationY(-getResources().getDimension(R.dimen.standard_120));
-        findViewById(R.id.fab3).animate().translationY(-getResources().getDimension(R.dimen.standard_180));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            findViewById(R.id.fab4).animate().translationY(-getResources().getDimension(R.dimen.standard_240));
-        } else {
-            findViewById(R.id.fab4).setVisibility(View.GONE);
-        }
-        isFABMenuOpen = true;
-    }
-
-    private void closeFABMenu(){
-        findViewById(R.id.fab1).animate().translationY(0);
-        findViewById(R.id.fab2).animate().translationY(0);
-        findViewById(R.id.fab3).animate().translationY(0);
-        findViewById(R.id.fab4).animate().translationY(0);
-        isFABMenuOpen = false;
-    }
-
-
-    // Close Bottom Sheet Method
-    public void closeBottomSheet(View view) {
-        // Changing floating button icon
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setImageResource(android.R.drawable.ic_menu_send);
-
-        if (isFABMenuOpen) {closeFABMenu();}
-
-        View bottomSheet = findViewById(R.id.bottom_sheet);
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-    }
 
 
     // Button Switches Methods
@@ -1587,250 +1265,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         return needstreatment;
-        }
-
-        private void shareResults(String patientName) {
-            TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
-            String scoreString = bottomsheetScoreText.getText().toString();
-
-            TextView bottomsheetCVDText = findViewById(R.id.bottomsheetCVDText);
-            String cvdString = bottomsheetCVDText.getText().toString();
-
-            TextView bottomsheetHeartAgeText = findViewById(R.id.bottomsheetHeartAgeText);
-            String heartageString = bottomsheetHeartAgeText.getText().toString();
-
-            TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText );
-            String risklevelString = bottomsheetRiskLevelText.getText().toString();
-
-            TextView bottomsheetTreatmentTitle  = findViewById(R.id.bottomsheetTreatmentTitle);
-            String treatmentTitleString = bottomsheetTreatmentTitle .getText().toString();
-
-            TextView bottomsheetNeedsTreatmentText  = findViewById(R.id.bottomsheetNeedsTreatmentText);
-            String treatmentString = bottomsheetNeedsTreatmentText .getText().toString();
-
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-
-            if (patientName.length() < 1) {
-                sendIntent.putExtra(Intent.EXTRA_TEXT, scoreString + "\n"+
-                        cvdString + "\n"+
-                        heartageString + "\n"+
-                        risklevelString + "\n"+
-                        treatmentTitleString + " " + treatmentString
-                );
-            }
-            else {
-                String patientDictionary = getResources().getString(R.string.patient);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, patientDictionary+": "+ patientName + "\n"+
-                        scoreString + "\n"+
-                        cvdString + "\n"+
-                        heartageString + "\n"+
-                        risklevelString + "\n"+
-                        treatmentTitleString + " " + treatmentString
-                );
-            }
-
-            sendIntent.setType("text/plain");
-            startActivity(sendIntent);
-        }
-
-        private void Schedule(String patientName){
-            TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
-            String scoreString = bottomsheetScoreText.getText().toString();
-
-            TextView bottomsheetCVDText = findViewById(R.id.bottomsheetCVDText);
-            String cvdString = bottomsheetCVDText.getText().toString();
-
-            TextView bottomsheetHeartAgeText = findViewById(R.id.bottomsheetHeartAgeText);
-            String heartageString = bottomsheetHeartAgeText.getText().toString();
-
-            TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText );
-            String risklevelString = bottomsheetRiskLevelText.getText().toString();
-
-            TextView bottomsheetTreatmentTitle  = findViewById(R.id.bottomsheetTreatmentTitle);
-            String treatmentTitleString = bottomsheetTreatmentTitle .getText().toString();
-
-            TextView bottomsheetNeedsTreatmentText  = findViewById(R.id.bottomsheetNeedsTreatmentText);
-            String treatmentString = bottomsheetNeedsTreatmentText .getText().toString();
-
-            Calendar c = Calendar.getInstance();
-            SimpleDateFormat dateformat = new SimpleDateFormat("d-M-yyyy h:m");
-            String datetime = dateformat.format(c.getTime());
-
-            int year = Integer.parseInt(datetime.substring(4, 8));
-            int month = Integer.parseInt(datetime.substring(2, 3)) - 1;
-            int day = Integer.parseInt(datetime.substring(0, 1));
-
-            SimpleDateFormat hourformat = new SimpleDateFormat("H");
-            int hour = Integer.parseInt(hourformat.format(c.getTime()));
-
-            SimpleDateFormat minformat = new SimpleDateFormat("m");
-            int minutes = Integer.parseInt(minformat.format(c.getTime()));
-            int minutesplus15 = Integer.parseInt(minformat.format(c.getTime())) + 15;
-
-            String eventTitle;
-            if (patientName.length() > 1) {
-                eventTitle = "Framingham "+patientName;
-            }
-            else {
-                eventTitle = "Framingham";
-            }
-
-            Calendar beginTime = Calendar.getInstance();
-            beginTime.set(year, month, day, hour, minutes);
-            Calendar endTime = Calendar.getInstance();
-            endTime.set(year, month, day, hour, minutesplus15);
-            Intent intent = new Intent(Intent.ACTION_INSERT)
-                    .setData(CalendarContract.Events.CONTENT_URI)
-                    .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
-                    .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                    .putExtra(CalendarContract.Events.TITLE, eventTitle)
-                    .putExtra(CalendarContract.Events.DESCRIPTION, scoreString + "\n"+
-                            cvdString + "\n"+
-                            heartageString + "\n"+
-                            risklevelString + "\n"+
-                            treatmentTitleString + " " + treatmentString)
-                    //.putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
-                    .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
-                    //.putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
-            startActivity(intent);
-        }
-
-        //PDF CREATION LOGIC
-        private void createPdf(String patientName){
-            TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
-            String scoreString = bottomsheetScoreText.getText().toString();
-
-            TextView bottomsheetCVDText = findViewById(R.id.bottomsheetCVDText);
-            String cvdString = bottomsheetCVDText.getText().toString();
-
-            TextView bottomsheetHeartAgeText = findViewById(R.id.bottomsheetHeartAgeText);
-            String heartageString = bottomsheetHeartAgeText.getText().toString();
-
-            TextView bottomsheetRiskLevelText = findViewById(R.id.bottomsheetRiskLevelText );
-            String risklevelString = bottomsheetRiskLevelText.getText().toString();
-
-            TextView bottomsheetTreatmentTitle  = findViewById(R.id.bottomsheetTreatmentTitle);
-            String treatmentTitleString = bottomsheetTreatmentTitle .getText().toString();
-
-            TextView bottomsheetNeedsTreatmentText  = findViewById(R.id.bottomsheetNeedsTreatmentText);
-            String treatmentString = bottomsheetNeedsTreatmentText .getText().toString();
-
-            // create a new document
-            PdfDocument document = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                document = new PdfDocument();
-            }
-
-            // crate a page description
-            PdfDocument.PageInfo pageInfo =
-                    null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                pageInfo = new PdfDocument.PageInfo.Builder(794, 1123, 1).create();
-            }
-
-            // start a page
-            PdfDocument.Page page = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                page = document.startPage(pageInfo);
-            }
-
-            Canvas canvas = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                canvas = page.getCanvas();
-            }
-
-            Paint paint = new Paint();
-            paint.setColor(Color.WHITE);
-            paint.setStyle(Paint.Style.FILL);
-            canvas.drawPaint(paint);
-
-            paint.setColor(Color.BLACK);
-            paint.setTextSize(30);
-
-            if(patientName.length() > 1) {
-                String patientDictionary = getResources().getString(R.string.patient);
-                canvas.drawText(patientDictionary + ": "+patientName, 10, 35, paint);
-            }
-            canvas.drawText(getResources().getString(R.string.navbar_title), 200, 135, paint);
-            canvas.drawText(scoreString, 20, 250, paint);
-            canvas.drawText(cvdString, 20, 350, paint);
-            canvas.drawText(heartageString, 20, 450, paint);
-            canvas.drawText(risklevelString, 20, 550, paint);
-            canvas.drawText(treatmentTitleString, 20, 650, paint);
-
-            String[] SplittedtreatmentString = splitStringEvery(treatmentString, 55);
-
-            int verticalSpace = 70;
-            for (int i = 0; i < SplittedtreatmentString.length; i++){
-                String y = String.valueOf(verticalSpace)+"0";
-                canvas.drawText(SplittedtreatmentString[i], 20, Float.parseFloat(y), paint);
-                verticalSpace = verticalSpace + 5;
-            }
-
-            // finish the page
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                document.finishPage(page);
-            }
-
-            // write the document content
-            String targetPdf = "/framingham-"+getResources().getString(R.string.score)+".pdf";
-            if(patientName.length() > 1) {
-                targetPdf = "/framingham-"+getResources().getString(R.string.score)+"-"+patientName+".pdf";
-            }
-            File filePath = new File("/sdcard"+targetPdf);
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    document.writeTo(new FileOutputStream(filePath));
-                }
-                //Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
-
-                // close the document
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    document.close();
-                }
-
-                pdfCreatedPopup(targetPdf, patientName);
-            } catch (IOException e) {
-                e.printStackTrace();
-                Toast.makeText(this, "Error: " + e.toString(),
-                        Toast.LENGTH_LONG).show();
-            }
-
-
-        }
-
-    public String[] splitStringEvery(String s, int interval) {
-        int arrayLength = (int) Math.ceil(((s.length() / (double)interval)));
-        String[] result = new String[arrayLength];
-
-        int j = 0;
-        int lastIndex = result.length - 1;
-        for (int i = 0; i < lastIndex; i++) {
-            result[i] = s.substring(j, j + interval);
-            j += interval;
-        } //Add the last bit
-        result[lastIndex] = s.substring(j);
-
-        return result;
-    }
-
-        private void readPdf(String filePath){
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+filePath);
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-
-            PackageManager manager = this.getPackageManager();
-            List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
-
-            if (infos.size() > 0) {
-                //Then there is an Application(s) can handle your intent
-                startActivity(intent);
-            } else {
-                //No Application can handle your intent
-                showNoAppForThatIntentPopup();
-            }
         }
 
 }

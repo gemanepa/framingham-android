@@ -16,7 +16,9 @@
     <string name="hypertension_in_treatment">Hipertension en tratamiento</string>
     <string name="yes">Si</string>
     <string name="no">No</string>
-    <string name="exit">Salir</string><string name="cancel">Cancelar</string>     <string name="exitquestion">Salir de aplicacion?</string>
+    <string name="exit">Salir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="exitquestion">Salir de aplicacion?</string>
     <string name="unknown">Desconocido</string>
     <string name="low">Bajo</string>
     <string name="intermediate">Intermedio</string>
@@ -27,19 +29,31 @@
     <string name="heartage">Edad Corazon</string>
     <string name="risk">Riesgo</string>
     <string name="treatment">Tratamiento:</string>
-    <string name="treatment_low_diabetes">Si bien el nivel de riesgo es Bajo, el paciente requiere tratamiento de estatinas debido a la presencia de diabetes o glucemia alta en ayunas en una persona mayor de 40 años</string><string name="patient">Paciente</string>
-    <string name="patient_name">Nombre del Paciente</string><string name="patient_not_requires_treatment">El paciente no requiere tratamiento.</string>
+    <string name="treatment_low_diabetes">Si bien el nivel de riesgo es Bajo, el paciente requiere tratamiento de estatinas debido a la presencia de diabetes o glucemia alta en ayunas en una persona mayor de 40 años</string>
+    <string name="patient">Paciente</string>
+    <string name="patient_name">Nombre del Paciente</string>
+    <string name="patient_not_requires_treatment">El paciente no requiere tratamiento.</string>
     <string name="patient_highly_requires_treatment">El paciente necesita tratamiento</string>
     <string name="statins_only_indicated">Estatinas solo indicadas en caso de:</string>
     <string name="aterosclerosis">Aterosclerosis Clinica</string>
     <string name="abdominal_aortic_aneurysm">Aneurisma Aortico Abdominal</string>
     <string name="chronic_kidney_disease">Enfermedad Renal Cronica</string>
     <string name="years">años</string>
-    <string name="treatment_intermediate_hasfactors">Si bien el nivel de riesgo no es Alto, el paciente presenta factores de riesgo para su edad</string> <string name="so_treatment_is_recommended">por lo que se recomienda tratamiento</string>
+    <string name="treatment_intermediate_hasfactors">Si bien el nivel de riesgo no es Alto, el paciente presenta factores de riesgo para su edad</string>
+    <string name="so_treatment_is_recommended">por lo que se recomienda tratamiento</string>
     <string name="treatment_intermediate_ldl">Si bien el nivel de riesgo no es Alto, el paciente presenta niveles altos de LDL y se recomienda tratamiento</string>
     <string name="treatment_intermediate_norisks">Si bien el nivel de riesgo no es Bajo, el paciente no presenta factores de riesgo por lo que generalmente no requiere tratamiento</string>
     <string name="primary_target">Objetivo Primario</string>
     <string name="alternative_target">Objetivo Alternativo</string>
-    <string name="decrease_in">disminucion en</string><string name="optional">opcional</string><string name="continuar">Continuar</string> <string name="close">Cerrar</string> <string name="view">Ver</string> <string name="send">Enviar</string> <string name="nopdfreader">App para leer pdf no detectada</string> <string name="gotoplaystore">Ir a la app Google Pdf Viewer en Google Play Store?</string> <string name="pdfsuccess">Archivo PDF creado exitosamente</string>
+    <string name="decrease_in">disminucion en</string>
+    <string name="optional">opcional</string>
+    <string name="continuar">Continuar</string>
+    <string name="close">Cerrar</string>
+    <string name="view">Ver</string>
+    <string name="send">Enviar</string>
+    <string name="nopdfreader">App para leer pdf no detectada</string>
+    <string name="gotoplaystore">Ir a la app Google Pdf Viewer en Google Play Store?</string>
+    <string name="pdfsuccess">Archivo PDF creado exitosamente</string>
     <string name="or">o</string>
+    <string name="title_activity_results">ResultsActivity</string>
 </resources>
