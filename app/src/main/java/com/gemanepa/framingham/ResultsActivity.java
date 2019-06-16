@@ -156,6 +156,18 @@ public class ResultsActivity extends AppCompatActivity {
         String optionalDictionary = getResources().getString(R.string.optional);
         String continueDictionary = getResources().getString(R.string.continuar);
 
+        Bundle extras = getIntent().getExtras();
+        final String gender = extras.getString("gender");
+        final String age = extras.getString("age");
+        final String hdl = extras.getString("hdl");
+        final String ldl = extras.getString("ldl");
+        final String totaldl = extras.getString("totaldl");
+        final String ta = extras.getString("ta");
+        final String waist = extras.getString("waist");
+        final String smoker = extras.getString("smoker");
+        final String diabetes = extras.getString("diabetes");
+        final String onTreatment = extras.getString("onTreatment");
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(patientnameDictionary+" ("+optionalDictionary+")");
 
@@ -172,13 +184,13 @@ public class ResultsActivity extends AppCompatActivity {
                 String patientName = input.getText().toString();
 
                 if (proceedWithFeature == 2) {
-                    shareResults(patientName);
+                    shareResults(patientName, gender, age, hdl, ldl, totaldl, ta, waist, smoker, diabetes, onTreatment);
                 }
                 else if (proceedWithFeature == 3) {
-                    Schedule(patientName);
+                    Schedule(patientName, gender, age, hdl, ldl, totaldl, ta, waist, smoker, diabetes, onTreatment);
                 }
                 else if (proceedWithFeature == 4) {
-                    createPdf(patientName);
+                    createPdf(patientName, gender, age, hdl, ldl, totaldl, ta, waist, smoker, diabetes, onTreatment);
                 }
             }
         });
@@ -315,7 +327,17 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
 
-    private void shareResults(String patientName) {
+    private void shareResults(String patientName, String gender, String age, String hdl, String ldl, String totaldl, String ta, String waist, String smoker, String diabetes, String onTreatment) {
+        String name = "";
+        if (patientName.length() > 1) {
+            String patientnameDictionary = getResources().getString(R.string.patient_name);
+            name = patientnameDictionary+": "+ patientName + "\n";
+        }
+
+        String framingham = getResources().getString(R.string.navbar_title);
+        String patientData = getResources().getString(R.string.patientdata);
+        String results = getResources().getString(R.string.results);
+
         TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
         String scoreString = bottomsheetScoreText.getText().toString();
 
@@ -337,30 +359,35 @@ public class ResultsActivity extends AppCompatActivity {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
 
-        if (patientName.length() < 1) {
-            sendIntent.putExtra(Intent.EXTRA_TEXT, scoreString + "\n"+
-                    cvdString + "\n"+
-                    heartageString + "\n"+
-                    risklevelString + "\n"+
-                    treatmentTitleString + " " + treatmentString
-            );
-        }
-        else {
-            String patientDictionary = getResources().getString(R.string.patient);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, patientDictionary+": "+ patientName + "\n"+
-                    scoreString + "\n"+
-                    cvdString + "\n"+
-                    heartageString + "\n"+
-                    risklevelString + "\n"+
-                    treatmentTitleString + " " + treatmentString
-            );
-        }
+        String allStrings = "#"+framingham.toUpperCase()+"\n\n"+
+                patientData.toUpperCase()+"\n"+
+                name+gender+"\n"+age+"\n"+hdl+"\n"+ldl+"\n"+totaldl+"\n"+ta+"\n"+onTreatment+"\n"+smoker+"\n"+diabetes+"\n"+waist+"\n\n"+
+                results.toUpperCase()+"\n"+
+                scoreString + "\n"+
+                cvdString + "\n"+
+                heartageString + "\n"+
+                risklevelString + "\n"+
+                treatmentTitleString + " " + treatmentString;
+
+        sendIntent.putExtra(Intent.EXTRA_TEXT, allStrings);
 
         sendIntent.setType("text/plain");
         startActivity(sendIntent);
     }
 
-    private void Schedule(String patientName){
+    private void Schedule(String patientName, String gender, String age, String hdl, String ldl, String totaldl, String ta, String waist, String smoker, String diabetes, String onTreatment){
+        String name = "";
+        String eventTitle = "Framingham";
+        if (patientName.length() > 1) {
+            String patientnameDictionary = getResources().getString(R.string.patient_name);
+            name = patientnameDictionary+": "+ patientName + "\n";
+            eventTitle = "Framingham "+patientName;
+        }
+
+        String framingham = getResources().getString(R.string.navbar_title);
+        String patientData = getResources().getString(R.string.patientdata);
+        String results = getResources().getString(R.string.results);
+
         TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
         String scoreString = bottomsheetScoreText.getText().toString();
 
@@ -378,7 +405,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         TextView bottomsheetNeedsTreatmentText  = findViewById(R.id.bottomsheetNeedsTreatmentText);
         String treatmentString = bottomsheetNeedsTreatmentText .getText().toString();
-        Log.d("asdf", patientName);
+
         Calendar c = Calendar.getInstance();
 
         SimpleDateFormat yearr = new SimpleDateFormat("yyyy");
@@ -405,15 +432,16 @@ public class ResultsActivity extends AppCompatActivity {
         int minutes = Integer.parseInt(minformat.format(c.getTime()));
         int minutesplus15 = Integer.parseInt(minformat.format(c.getTime())) + 15;
 
-        String eventTitle;
-        if (patientName.length() > 1) {
-            eventTitle = "Framingham "+patientName;
-        }
-        else {
-            eventTitle = "Framingham";
-        }
 
-        Log.d("eventTitle", eventTitle);
+        String allStrings = "#"+framingham.toUpperCase()+"\n\n"+
+                patientData.toUpperCase()+"\n"+
+                name+gender+"\n"+age+"\n"+hdl+"\n"+ldl+"\n"+totaldl+"\n"+ta+"\n"+onTreatment+"\n"+smoker+"\n"+diabetes+"\n"+waist+"\n\n"+
+                results.toUpperCase()+"\n"+
+                scoreString + "\n"+
+                cvdString + "\n"+
+                heartageString + "\n"+
+                risklevelString + "\n"+
+                treatmentTitleString + " " + treatmentString;
 
         Calendar beginTime = Calendar.getInstance();
         beginTime.set(year, month, day, hour, minutes);
@@ -424,11 +452,7 @@ public class ResultsActivity extends AppCompatActivity {
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                 .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
                 .putExtra(CalendarContract.Events.TITLE, eventTitle)
-                .putExtra(CalendarContract.Events.DESCRIPTION, scoreString + "\n"+
-                        cvdString + "\n"+
-                        heartageString + "\n"+
-                        risklevelString + "\n"+
-                        treatmentTitleString + " " + treatmentString)
+                .putExtra(CalendarContract.Events.DESCRIPTION, allStrings)
                 //.putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
                 .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
         //.putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com");
@@ -436,7 +460,10 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     //PDF CREATION LOGIC
-    private void createPdf(String patientName){
+    private void createPdf(String patientName, String gender, String age, String hdl, String ldl, String totaldl, String ta, String waist, String smoker, String diabetes, String onTreatment){
+        String patientData = getResources().getString(R.string.patientdata);
+        String results = getResources().getString(R.string.results);
+
         TextView bottomsheetScoreText = findViewById(R.id.bottomsheetScoreText);
         String scoreString = bottomsheetScoreText.getText().toString();
 
@@ -479,28 +506,64 @@ public class ResultsActivity extends AppCompatActivity {
             canvas = page.getCanvas();
         }
 
+        Calendar c = Calendar.getInstance();
+
+        SimpleDateFormat yearr = new SimpleDateFormat("yyyy");
+        String yearString = getResources().getString(R.string.year) +": "+yearr.format(c.getTime());
+
+        SimpleDateFormat monthh = new SimpleDateFormat("MM");
+        String monthString = getResources().getString(R.string.month) +": "+monthh.format(c.getTime());
+        Log.d("monthString", monthString);
+        SimpleDateFormat dayy = new SimpleDateFormat("dd");
+        String dayString = getResources().getString(R.string.day) +": "+dayy.format(c.getTime());
+
+
+
         Paint paint = new Paint();
         paint.setColor(Color.WHITE);
         paint.setStyle(Paint.Style.FILL);
         canvas.drawPaint(paint);
 
         paint.setColor(Color.BLACK);
-        paint.setTextSize(30);
+        paint.setTextSize(27);
 
         if(patientName.length() > 1) {
             String patientDictionary = getResources().getString(R.string.patient);
             canvas.drawText(patientDictionary + ": "+patientName, 10, 35, paint);
         }
-        canvas.drawText(getResources().getString(R.string.navbar_title), 200, 135, paint);
-        canvas.drawText(scoreString, 20, 250, paint);
-        canvas.drawText(cvdString, 20, 350, paint);
-        canvas.drawText(heartageString, 20, 450, paint);
-        canvas.drawText(risklevelString, 20, 550, paint);
-        canvas.drawText(treatmentTitleString, 20, 650, paint);
+        canvas.drawText(yearString, 650, 35, paint);
+        canvas.drawText(monthString, 650, 65, paint);
+        canvas.drawText(dayString, 650, 95, paint);
 
-        String[] SplittedtreatmentString = splitStringEvery(treatmentString, 55);
+        canvas.drawText(getResources().getString(R.string.navbar_title).toUpperCase(), 200, 100, paint);
 
-        int verticalSpace = 70;
+        canvas.drawText(patientData.toUpperCase(), 20, 175, paint);
+        canvas.drawText(gender, 20, 225, paint);
+        canvas.drawText(age, 520, 225, paint);
+
+        canvas.drawText(totaldl, 20, 275, paint);
+        canvas.drawText(hdl, 20, 325, paint);
+        canvas.drawText(ldl, 20, 375, paint);
+
+        canvas.drawText(ta, 20, 425, paint);
+        canvas.drawText(onTreatment, 20, 475, paint);
+
+        canvas.drawText(smoker, 20, 525, paint);
+        canvas.drawText(diabetes, 20, 575, paint);
+        canvas.drawText(waist, 20, 625, paint);
+
+        canvas.drawText(results.toUpperCase(), 20, 700, paint);
+        canvas.drawText(scoreString, 20, 750, paint);
+        canvas.drawText(cvdString, 420, 750, paint);
+
+        canvas.drawText(heartageString, 20, 800, paint);
+        canvas.drawText(risklevelString, 420, 800, paint);
+
+        canvas.drawText(treatmentTitleString, 20, 850, paint);
+
+        String[] SplittedtreatmentString = splitStringEvery(treatmentString, 60);
+
+        int verticalSpace = 90;
         for (int i = 0; i < SplittedtreatmentString.length; i++){
             String y = String.valueOf(verticalSpace)+"0";
             canvas.drawText(SplittedtreatmentString[i], 20, Float.parseFloat(y), paint);

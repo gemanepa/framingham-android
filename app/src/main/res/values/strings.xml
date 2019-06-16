@@ -53,7 +53,6 @@
     <string name="send">Enviar</string>
     <string name="nopdfreader">App para leer pdf no detectada</string>
     <string name="gotoplaystore">Ir a la app Google Pdf Viewer en Google Play Store?</string>
-    <string name="pdfsuccess">Archivo PDF creado exitosamente</string>
+    <string name="pdfsuccess">Archivo PDF creado exitosamente</string> <string name="patientdata">Datos del Paciente</string> <string name="results">Resultados</string> <string name="year">Año</string> <string name="month">Mes</string> <string name="day">Dia</string>
     <string name="or">o</string>
-    <string name="title_activity_results">ResultsActivity</string>
 </resources>

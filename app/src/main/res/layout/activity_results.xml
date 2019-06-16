@@ -14,9 +14,21 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="0dp"
+            android:background="@color/design_default_color_primary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="15dp"
+            android:text="@string/navbar_title"
+            android:textColor="@android:color/background_light"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -30,8 +42,8 @@
         android:layout_margin="@dimen/fab_margin"
         android:tint="@android:color/white"
         app:backgroundTint="#4689C8"
-        app:srcCompat="@android:drawable/ic_input_get"
-        tools:srcCompat="@android:drawable/ic_input_get" />
+        app:srcCompat="@android:drawable/stat_sys_download"
+        tools:srcCompat="@android:drawable/stat_sys_download" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab3"

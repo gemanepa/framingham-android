@@ -12,7 +12,7 @@
     <string name="age">Età</string>
     <string name="hypertension_in_treatment">Ipertensione sotto trattamento</string>
     <string name="diabetes">Diabete o alterata glicemia</string>
-    <string name="arterial_pression">Pressione Sanguigna Sistolica</string>
+    <string name="arterial_pression">Pressione Sanguigna Sistolica (mmHg)</string>
     <string name="waist_circumference">Taglia della Cintura</string>
     <string name="smoking">Tabagismo</string>
     <string name="yes">Sì</string>
@@ -31,7 +31,7 @@
     <string name="treatment">Trattamento:</string>
     <string name="primary_target">Obiettivo Primario</string>
     <string name="alternative_target">Obiettivo Alternativo</string>
-    <string name="decrease_in">diminuzione di</string><string name="optional">opzionale</string><string name="continuar">Continuare</string> <string name="close">Chiudi finestra</string> <string name="view">Vedi file</string> <string name="send">Inviare</string> <string name="nopdfreader">App per leggere pdf non rilevato</string> <string name="gotoplaystore">Apri l\'applicazione Google PDF Viewer nel Google Play Store?</string> <string name="pdfsuccess">Archivio PDF creato con successo</string>
+    <string name="decrease_in">diminuzione di</string><string name="optional">opzionale</string><string name="continuar">Continuare</string> <string name="close">Chiudi finestra</string> <string name="view">Vedi file</string> <string name="send">Inviare</string> <string name="nopdfreader">App per leggere pdf non rilevato</string> <string name="gotoplaystore">Apri l\'applicazione Google PDF Viewer nel Google Play Store?</string> <string name="pdfsuccess">Archivio PDF creato con successo</string> <string name="patientdata">Dati del paziente</string> <string name="results">Risultati</string> <string name="year">Anno</string> <string name="month">Mese</string> <string name="day">Giorno</string>
     <string name="or">o</string>
     <string name="patient">Paziente</string><string name="patient_highly_requires_treatment">Il paziente richiede trattamento</string>
     <string name="patient_name">Nome del Paziente</string><string name="patient_not_requires_treatment">Il paziente non richiede trattamento</string>

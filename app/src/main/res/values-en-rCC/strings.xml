@@ -10,7 +10,7 @@
     <string name="colesterol_hdl">HDL Cholesterol (mg/dl)</string>
     <string name="colesterol_ldl">LDL Cholesterol (mg/dl)</string>
     <string name="colesterol_total">Total Cholesterol (mg/dl)</string>
-    <string name="arterial_pression">Systolic Arterial Pressure</string>
+    <string name="arterial_pression">Systolic Arterial Pressure (mmHg)</string>
     <string name="waist_circumference">Waist Circumference</string>
     <string name="smoking">Smoker</string>
     <string name="diabetes">Diabetes or Impaired fasting glucose</string>
@@ -35,13 +35,13 @@
     <string name="aterosclerosis">Clinical Atherosclerosis</string>
     <string name="abdominal_aortic_aneurysm">Abdominal Aortic Aneurysm</string>
     <string name="chronic_kidney_disease">Chronic Kidney Disease</string>
-    <string name="years">years</string>
+    <string name="years">years old</string>
     <string name="treatment_intermediate_hasfactors">While Risk Level is not High, the patient presents risk factors for its age</string> <string name="so_treatment_is_recommended">so treatment is recommended</string>
     <string name="treatment_intermediate_ldl">While Risk Level is not High, high levels of LDL are present and treatment is recommended</string>
     <string name="treatment_intermediate_norisks">While Risk Level is not Low, the patient presents no risk factors for its age and would generally require no meds treatment</string>
     <string name="patient_highly_requires_treatment">Patient highly requires treatment</string>
     <string name="primary_target">Primary Target</string>
     <string name="alternative_target">Alternative Target</string>
-    <string name="decrease_in">decrease in</string><string name="optional">optional</string><string name="continuar">Continue</string> <string name="close">Close</string> <string name="view">View</string> <string name="send">Send</string> <string name="nopdfreader">No pdf reader/viewer app detected</string> <string name="gotoplaystore">Go to Google Pdf Viewer app in Google Play Store?</string> <string name="pdfsuccess">PDF File successfully created</string>
+    <string name="decrease_in">decrease in</string><string name="optional">optional</string><string name="continuar">Continue</string> <string name="close">Close</string> <string name="view">View</string> <string name="send">Send</string> <string name="nopdfreader">No pdf reader/viewer app detected</string> <string name="gotoplaystore">Go to Google Pdf Viewer app in Google Play Store?</string> <string name="pdfsuccess">PDF File successfully created</string> <string name="patientdata">Patient Data</string> <string name="results">Results</string> <string name="year">Year</string> <string name="month">Month</string> <string name="day">Day</string>
     <string name="or">or</string>
 </resources>

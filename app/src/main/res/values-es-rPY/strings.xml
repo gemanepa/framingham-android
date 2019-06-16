@@ -41,6 +41,6 @@
     <string name="treatment_intermediate_norisks">Si bien el nivel de riesgo no es Bajo, el paciente no presenta factores de riesgo por lo que generalmente no requiere tratamiento</string>
     <string name="primary_target">Objetivo Primario</string>
     <string name="alternative_target">Objetivo Alternativo</string>
-    <string name="decrease_in">disminucion en</string><string name="optional">opcional</string><string name="continuar">Continuar</string> <string name="close">Cerrar</string> <string name="view">Ver</string> <string name="send">Enviar</string> <string name="nopdfreader">App para leer pdf no detectada</string> <string name="gotoplaystore">Ir a la app Google Pdf Viewer en Google Play Store?</string> <string name="pdfsuccess">Archivo PDF creado exitosamente</string>
+    <string name="decrease_in">disminucion en</string><string name="optional">opcional</string><string name="continuar">Continuar</string> <string name="close">Cerrar</string> <string name="view">Ver</string> <string name="send">Enviar</string> <string name="nopdfreader">App para leer pdf no detectada</string> <string name="gotoplaystore">Ir a la app Google Pdf Viewer en Google Play Store?</string> <string name="pdfsuccess">Archivo PDF creado exitosamente</string> <string name="patientdata">Datos del Paciente</string> <string name="results">Resultados</string> <string name="year">Año</string> <string name="month">Mes</string> <string name="day">Dia</string>
     <string name="or">o</string>
 </resources>

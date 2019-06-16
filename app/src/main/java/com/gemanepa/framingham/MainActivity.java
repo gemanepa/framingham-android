@@ -22,7 +22,7 @@ import android.support.v7.widget.Toolbar;
 // Alert Window
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -77,11 +77,72 @@ public class MainActivity extends AppCompatActivity {
                 String needstreatment = needsTreatment(risklevel, gender, agePoints, hdlPoints, smokingPoints);
 
                 Intent i = new Intent(MainActivity.this, ResultsActivity.class);
+
                 i.putExtra("score",scoreString);
                 i.putExtra("cvd", cvd);
                 i.putExtra("heartage",heartage);
                 i.putExtra("risklevel", risklevel);
                 i.putExtra("needstreatment", needstreatment);
+
+
+                TextView genderTextView = (TextView) findViewById(R.id.gendertext);
+                String genderText = genderTextView.getText().toString();
+                i.putExtra("gender", genderText +": "+ gender);
+
+                TextView ageTextView = (TextView) findViewById(R.id.agetext);
+                String ageText = ageTextView.getText().toString();
+                ageSpinner = (Spinner) findViewById(R.id.ageinput);
+                String ageRangeSelected = ageSpinner.getSelectedItem().toString();
+                i.putExtra("age", ageText +": "+ ageRangeSelected);
+
+                TextView hdlTextView = (TextView) findViewById(R.id.hdltext);
+                String hdlText = hdlTextView.getText().toString();
+                hdlSpinner = (Spinner) findViewById(R.id.hdlinput);
+                String hdlRangeSelected = hdlSpinner.getSelectedItem().toString();
+                i.putExtra("hdl", hdlText +": "+ hdlRangeSelected);
+
+                TextView ldlTextView = (TextView) findViewById(R.id.ldltext);
+                String ldlText = ldlTextView.getText().toString();
+                ldlSpinner = (Spinner) findViewById(R.id.ldlinput);
+                String ldlRangeSelected = ldlSpinner.getSelectedItem().toString();
+                i.putExtra("ldl", ldlText +": "+ ldlRangeSelected);
+
+                TextView totaldlTextView = (TextView) findViewById(R.id.totaldltext);
+                String totaldlText = totaldlTextView.getText().toString();
+                totaldlSpinner = (Spinner) findViewById(R.id.totaldlinput);
+                String totaldlRangeSelected = totaldlSpinner.getSelectedItem().toString();
+                i.putExtra("totaldl", totaldlText +": "+ totaldlRangeSelected);
+
+                TextView taTextView = (TextView) findViewById(R.id.tatext);
+                String taText = taTextView.getText().toString();
+                taSpinner = (Spinner) findViewById(R.id.tainput);
+                String taRangeSelected = taSpinner.getSelectedItem().toString();
+                i.putExtra("ta", taText +": "+ taRangeSelected);
+
+                TextView waistTextView = (TextView) findViewById(R.id.waisttext);
+                String waistText = waistTextView.getText().toString();
+                waistSpinner = (Spinner) findViewById(R.id.waistinput);
+                String waistRangeSelected = waistSpinner.getSelectedItem().toString();
+                i.putExtra("waist", waistText +": "+ waistRangeSelected);
+
+                TextView smokerTextView = (TextView) findViewById(R.id.smokertext);
+                String smokerText = smokerTextView.getText().toString();
+                Button smokerButton = findViewById(R.id.smokerinput);
+                String smokerButtonCurrentState = smokerButton.getText().toString();
+                i.putExtra("smoker", smokerText +": "+ smokerButtonCurrentState);
+
+                TextView diabetesTextView = (TextView) findViewById(R.id.diabetestext);
+                String diabetesText = diabetesTextView.getText().toString();
+                Button diabetesButton = findViewById(R.id.diabetesinput);
+                String diabetesButtonCurrentState = diabetesButton.getText().toString();
+                i.putExtra("diabetes", diabetesText +": "+ diabetesButtonCurrentState);
+
+                TextView treatmentTextView = (TextView) findViewById(R.id.treatmenttext);
+                String treatmentText = treatmentTextView.getText().toString();
+                Button treatmentButton = findViewById(R.id.treatmentinput);
+                String isOnTreatment = treatmentButton.getText().toString();
+                i.putExtra("onTreatment", treatmentText +": "+ isOnTreatment);
+
                 startActivity(i);
 
             }
@@ -104,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
         String [] hdlRanges = {"< 35.0", "35.0 - 45.9", "46.0 - 49.9", "50.0 - 61.9", "> 62.0"};
         String [] ldlRanges = {"< 80.0", "80.0 - 135.0", "> 135.0"};
         String [] totaldlRanges = {"< 158", "158 - 200", "201 - 239", "240 - 278", "> 278"};
-        String [] waistRanges = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] waistRanges = {"-","< 102cm (40inches)", "> 102cm (40inches)"};
         String [] taRanges = {"< 120", "120 - 129", "130 - 139", "140 - 149", "150 - 159", "160+"};
 
         //array adapters used to bind values in the spinners
@@ -186,9 +247,9 @@ public class MainActivity extends AppCompatActivity {
     }
     // ... Method used by genderSwitch to update waist value component based on gender
     public String[] getWaist(String gender) {
-        String [] waist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
-        String [] menWaist = {"-", "< 102cm (40inches)", "> 102cm (40inches)"};
-        String [] womenWaist = {"-", "< 88cm (35inches)", "> 88cm (35inches)"};
+        String [] waist = {"-","< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] menWaist = {"-","< 102cm (40inches)", "> 102cm (40inches)"};
+        String [] womenWaist = {"-","< 88cm (35inches)", "> 88cm (35inches)"};
 
 
         String man = getResources().getString(R.string.man);
@@ -369,7 +430,7 @@ public class MainActivity extends AppCompatActivity {
         int hdlPoints = 0;
 
         switch(hdlRangeSelected) {
-            case "< 35.0":
+            case"< 35.0":
                 hdlPoints = 2;
                 break;
             case "35.0 - 45.9":
@@ -392,7 +453,7 @@ public class MainActivity extends AppCompatActivity {
         int hdlPoints = 0;
 
         switch(hdlRangeSelected) {
-            case "< 35.0":
+            case"< 35.0":
                 hdlPoints = 2;
                 break;
             case "35.0 - 45.9":
@@ -435,7 +496,7 @@ public class MainActivity extends AppCompatActivity {
         int totaldlPoints = 0;
 
         switch(totaldlRangeSelected) {
-            case "< 158":
+            case"< 158":
                 totaldlPoints = 0;
                 break;
             case "158 - 200":
@@ -458,7 +519,7 @@ public class MainActivity extends AppCompatActivity {
         int totaldlPoints = 0;
 
         switch(totaldlRangeSelected) {
-            case "< 158":
+            case"< 158":
                 totaldlPoints = 0;
                 break;
             case "158 - 200":
@@ -507,7 +568,7 @@ public class MainActivity extends AppCompatActivity {
         String no = getResources().getString(R.string.no);
 
         switch(taRangeSelected) {
-            case "< 120":
+            case"< 120":
                 if(isOnTreatment.equals(no)) {
                     taPoints = -2;
                 }
@@ -566,7 +627,7 @@ public class MainActivity extends AppCompatActivity {
         String no = getResources().getString(R.string.no);
 
         switch(taRangeSelected) {
-            case "< 120":
+            case"< 120":
                 if(isOnTreatment.equals(no)) {
                     taPoints = -3;
                 }
@@ -667,13 +728,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch(Score) {
             case -5:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -4:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -3:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -2:
                 cvd = "1.1%";
@@ -771,16 +832,16 @@ public class MainActivity extends AppCompatActivity {
 
         switch(Score) {
             case -5:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -4:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -3:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -2:
-                cvd = "< 1%";
+                cvd ="< 1%";
                 break;
             case -1:
                 cvd = "1.0%";
@@ -893,19 +954,19 @@ public class MainActivity extends AppCompatActivity {
 
         switch(Score) {
             case -5:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -4:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -3:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -2:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -1:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case 0:
                 heartage = "30";
@@ -997,22 +1058,22 @@ public class MainActivity extends AppCompatActivity {
 
         switch(Score) {
             case -5:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -4:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -3:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -2:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case -1:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case 0:
-                heartage = "< 30";
+                heartage ="< 30";
                 break;
             case 1:
                 heartage = "31";
