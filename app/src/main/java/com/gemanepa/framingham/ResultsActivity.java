@@ -34,6 +34,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
+import static android.support.v4.content.FileProvider.getUriForFile;
+
 public class ResultsActivity extends AppCompatActivity {
     boolean isFABMenuOpen = false;
 
@@ -253,6 +255,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 //intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"email@example.com"});
 
                 if (patientName.length() > 1) {
@@ -270,9 +273,8 @@ public class ResultsActivity extends AppCompatActivity {
                     finish();
                     return;
                 }
-                Uri uri = Uri.fromFile(file);
-                Log.d("uri", String.valueOf(uri));
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                Uri contentUri = getUriForFile(ResultsActivity.this, "com.gemanepa.fileprovider", file);
+                intent.putExtra(Intent.EXTRA_STREAM, contentUri);
                 startActivity(Intent.createChooser(intent, "Send email..."));
                 /*
                 final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -619,9 +621,20 @@ public class ResultsActivity extends AppCompatActivity {
 
     private void readPdf(String filePath){
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+filePath);
+
+        /*
+        Log.d("filePath", filePath);
+        Log.d("absolutePath", Environment.getExternalStorageDirectory().getAbsolutePath());
+        Log.d("file", file.toString());
+        */
+        Uri contentUri = getUriForFile(ResultsActivity.this, "com.gemanepa.fileprovider", file);
+
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        intent.setDataAndType(contentUri, "application/pdf");
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
         PackageManager manager = this.getPackageManager();
         List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
