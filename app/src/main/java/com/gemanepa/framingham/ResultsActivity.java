@@ -15,11 +15,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.CalendarContract;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+
+import static androidx.core.content.FileProvider.getUriForFile;
 
 public class ResultsActivity extends AppCompatActivity {
     boolean isFABMenuOpen = false;
@@ -253,6 +255,7 @@ public class ResultsActivity extends AppCompatActivity {
 
                 Intent intent = new Intent(Intent.ACTION_SEND);
                 intent.setType("text/plain");
+                intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
                 //intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"email@example.com"});
 
                 if (patientName.length() > 1) {
@@ -263,16 +266,14 @@ public class ResultsActivity extends AppCompatActivity {
                 }
                 else {intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.navbar_title)+" PDF");}
                 //intent.putExtra(Intent.EXTRA_TEXT, "body text");
-                File root = Environment.getExternalStorageDirectory();
-                File file = new File(root, targetPdf);
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),targetPdf);
                 if (!file.exists() || !file.canRead()) {
                     Toast.makeText(ResultsActivity.this, "Error :(", Toast.LENGTH_LONG).show();
                     finish();
                     return;
                 }
-                Uri uri = Uri.fromFile(file);
-                Log.d("uri", String.valueOf(uri));
-                intent.putExtra(Intent.EXTRA_STREAM, uri);
+                Uri contentUri = getUriForFile(ResultsActivity.this, "com.gemanepa.fileprovider", file);
+                intent.putExtra(Intent.EXTRA_STREAM, contentUri);
                 startActivity(Intent.createChooser(intent, "Send email..."));
                 /*
                 final Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -576,13 +577,15 @@ public class ResultsActivity extends AppCompatActivity {
         }
 
         // write the document content
-        String targetPdf = "/framingham-"+getResources().getString(R.string.score)+".pdf";
+        String targetPdf = "Framingham-"+getResources().getString(R.string.score)+".pdf";
         if(patientName.length() > 1) {
-            targetPdf = "/framingham-"+getResources().getString(R.string.score)+"-"+patientName+".pdf";
+            targetPdf = "Framingham-"+getResources().getString(R.string.score)+"-"+patientName+".pdf";
         }
-        File filePath = new File("/sdcard"+targetPdf);
+
+
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                File filePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),targetPdf);
                 document.writeTo(new FileOutputStream(filePath));
             }
             //Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
@@ -618,10 +621,21 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void readPdf(String filePath){
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+filePath);
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),filePath);
+
+        /*
+        Log.d("filePath", filePath);
+        Log.d("absolutePath", Environment.getExternalStorageDirectory().getAbsolutePath());
+        Log.d("file", file.toString());
+        */
+        Uri contentUri = getUriForFile(ResultsActivity.this, "com.gemanepa.fileprovider", file);
+
+
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        intent.setDataAndType(contentUri, "application/pdf");
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
 
         PackageManager manager = this.getPackageManager();
         List<ResolveInfo> infos = manager.queryIntentActivities(intent, 0);
