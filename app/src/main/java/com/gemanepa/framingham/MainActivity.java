@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 // Buttons
-import android.support.design.widget.FloatingActionButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.widget.Button;
 
 // Spinner
@@ -14,10 +14,10 @@ import android.widget.Spinner;
 import android.widget.ArrayAdapter;
 
 // Snackbar
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 // Toolbar
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 
 // Alert Window
 import android.app.AlertDialog;
