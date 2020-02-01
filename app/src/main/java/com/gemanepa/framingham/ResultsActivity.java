@@ -266,8 +266,7 @@ public class ResultsActivity extends AppCompatActivity {
                 }
                 else {intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.navbar_title)+" PDF");}
                 //intent.putExtra(Intent.EXTRA_TEXT, "body text");
-                File root = Environment.getExternalStorageDirectory();
-                File file = new File(root, targetPdf);
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),targetPdf);
                 if (!file.exists() || !file.canRead()) {
                     Toast.makeText(ResultsActivity.this, "Error :(", Toast.LENGTH_LONG).show();
                     finish();
@@ -578,13 +577,15 @@ public class ResultsActivity extends AppCompatActivity {
         }
 
         // write the document content
-        String targetPdf = "/framingham-"+getResources().getString(R.string.score)+".pdf";
+        String targetPdf = "Framingham-"+getResources().getString(R.string.score)+".pdf";
         if(patientName.length() > 1) {
-            targetPdf = "/framingham-"+getResources().getString(R.string.score)+"-"+patientName+".pdf";
+            targetPdf = "Framingham-"+getResources().getString(R.string.score)+"-"+patientName+".pdf";
         }
-        File filePath = new File("/sdcard"+targetPdf);
+
+
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                File filePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),targetPdf);
                 document.writeTo(new FileOutputStream(filePath));
             }
             //Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
@@ -620,7 +621,7 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void readPdf(String filePath){
-        File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+filePath);
+        File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),filePath);
 
         /*
         Log.d("filePath", filePath);
