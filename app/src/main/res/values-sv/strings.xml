@@ -14,7 +14,7 @@
     <string name="waist_circumference">Midja omkrets</string>
     <string name="smoking">Rökaren</string>
     <string name="diabetes">Diabetes eller höga fastande glykemi</string>
-    <string name="hypertension_in_treatment">Hypertension behandlad</string>
+    <string name="hypertension_in_treatment">Behandlad hypertoni</string>
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="exit">Utgång</string>
@@ -37,7 +37,7 @@
     <string name="patient_highly_requires_treatment">Patienten behöver behandling</string>
     <string name="statins_only_indicated">Statiner indikeras endast om:</string>
     <string name="aterosclerosis">Klinisk åderförkalkning</string>
-    <string name="abdominal_aortic_aneurysm">Abdominal Aortic Aneurysm</string>
+    <string name="abdominal_aortic_aneurysm">Abdominal aortaanurysm</string>
     <string name="chronic_kidney_disease">Kronisk njursjukdom</string>
     <string name="years">År gammal</string>
     <string name="treatment_intermediate_hasfactors">Även om risknivån inte är hög, har patienten riskfaktorer för sin ålder</string>
