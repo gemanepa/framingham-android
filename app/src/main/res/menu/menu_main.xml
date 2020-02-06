@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gemanepa.framingham.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_webitem"
         android:orderInCategory="100"
         android:title="Web Version"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_suggestionsitem"
         android:orderInCategory="100"
         android:title="Send suggestions"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_rateitem"
         android:orderInCategory="100"
         android:title="Rate"
         app:showAsAction="never" />

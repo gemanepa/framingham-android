@@ -61,7 +61,14 @@ public class ResultsActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.menu_webitem) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.framinghamcalc.now.sh")));
+            return true;
+        }
+        if (id == R.id.menu_suggestionsitem) {
+            return true;
+        }
+        if (id == R.id.menu_rateitem) {
             return true;
         }
 
