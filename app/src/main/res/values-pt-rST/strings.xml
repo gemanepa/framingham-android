@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CR Framingham</string>
-<string name="navbar_title">CardioRisco Framingham</string>
+<string name="navbar_title">CardioRisco Framingham</string><string name="langcode">pt</string><string name="openwebversion">Abrir Versão Web</string><string name="sendfeedback">Envie sugestões</string><string name="rateapp">Avaliar app</string><string name="uninstall">Desinstalar</string>
     <string name="smoking">Tabagismo</string>
     <string name="action_settings">Configuração</string>
     <string name="gender">Gênero</string>

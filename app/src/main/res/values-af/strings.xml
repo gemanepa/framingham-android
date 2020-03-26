@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">KR Framingham</string>
-    <string name="navbar_title">KardioRisiko Framingham</string>
+    <string name="navbar_title">KardioRisiko Framingham</string><string name="langcode">af</string><string name="openwebversion">Oop Webweergawe</string><string name="sendfeedback">Stuur voorstelle</string><string name="rateapp">Gradeer app</string><string name="uninstall">Verwyder</string>
     <string name="action_settings">Opset</string>
     <string name="gender">Genre</string>
     <string name="woman">Vrou</string>

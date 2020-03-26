@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HR Framingham</string>
-    <string name="navbar_title">HartRisico Framingham</string>
+    <string name="navbar_title">HartRisico Framingham</string><string name="langcode">nl</string><string name="openwebversion">Open Webversie</string><string name="sendfeedback">Suggesties verzenden</string><string name="rateapp">Beoordeel app</string><string name="uninstall">App verwijderen</string>
     <string name="action_settings">Configuratie</string>
     <string name="gender">Geslacht</string>
     <string name="man">Man</string>

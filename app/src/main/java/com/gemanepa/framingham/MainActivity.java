@@ -1,5 +1,6 @@
 package com.gemanepa.framingham;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 
 import android.net.Uri;
@@ -52,13 +53,30 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_webitem) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.framinghamcalc.now.sh")));
+            String langcode = getResources().getString(R.string.langcode);
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://framinghamcalc-"+langcode+".gemanepa.com")));
             return true;
         }
         if (id == R.id.menu_suggestionsitem) {
+            Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+            emailIntent.setData(Uri.parse("mailto:contact@gemanepa.com"));
+            startActivity(emailIntent);
             return true;
         }
-        if (id == R.id.menu_rateitem) {
+        if (id == R.id.menu_rateitem || id == R.id.menu_uninstallapp) {
+            Uri uri = Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
+            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+            // To count with Play market backstack, After pressing back button,
+            // to taken back to our application, we need to add following flags to intent.
+            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            try {
+                startActivity(goToMarket);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://play.google.com/store/apps/details?id=" + getApplicationContext().getPackageName())));
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

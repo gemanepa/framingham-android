@@ -6,8 +6,8 @@ android {
         applicationId "com.gemanepa.framingham"
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 11
-        versionName "2.4"
+        versionCode 13
+        versionName "3.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled = true
     }

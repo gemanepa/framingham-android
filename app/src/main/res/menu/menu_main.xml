@@ -5,16 +5,21 @@
     <item
         android:id="@+id/menu_webitem"
         android:orderInCategory="100"
-        android:title="Web Version"
+        android:title="@string/openwebversion"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_suggestionsitem"
         android:orderInCategory="100"
-        android:title="Send suggestions"
+        android:title="@string/sendfeedback"
         app:showAsAction="never" />
     <item
         android:id="@+id/menu_rateitem"
         android:orderInCategory="100"
-        android:title="Rate"
+        android:title="@string/rateapp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_uninstallapp"
+        android:orderInCategory="100"
+        android:title="@string/uninstall"
         app:showAsAction="never" />
 </menu>

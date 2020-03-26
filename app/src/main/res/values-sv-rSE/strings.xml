@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">CR Framingham</string>
     <string name="action_settings">Inställningar</string>
-    <string name="navbar_title">HjärtRisk Framingham</string>
+    <string name="navbar_title">HjärtRisk Framingham</string><string name="langcode">sv</string><string name="openwebversion">Öppen Webbversion</string><string name="sendfeedback">Skicka synpunkter</string><string name="rateapp">Betygsätt app</string><string name="uninstall">Avinstallera</string>
     <string name="gender">Kön</string>
     <string name="man">Man</string>
     <string name="woman">Kvinnor</string>
