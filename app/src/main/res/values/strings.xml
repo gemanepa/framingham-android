@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">CR Framingham</string>
-    <string name="navbar_title">CardioRiesgo Framingham</string>
+    <string name="navbar_title">CardioRiesgo Framingham</string><string name="langcode">es</string><string name="openwebversion">Abrir Version Web</string><string name="sendfeedback">Enviar sugerencias</string><string name="rateapp">Valorar aplicación</string><string name="uninstall">Desinstalar</string>
     <string name="action_settings">Configuracion</string>
     <string name="gender">Genero</string>
     <string name="man">Hombre</string>

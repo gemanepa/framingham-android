@@ -37,7 +37,7 @@
     <string name="heartage">Herzalter</string>
     <string name="cvdexplanation">HKR: Herz-Kreislauf-Risiko in 10 Jahren</string>
     <string name="cvd">HKR</string>
-    <string name="navbar_title">Framingham Herzrisiko</string>
+    <string name="navbar_title">Framingham Herzrisiko</string><string name="langcode">de</string><string name="openwebversion">Webversion Öffnen</string><string name="sendfeedback">Feedback schicken</string><string name="rateapp">App bewerten</string><string name="uninstall">Deinstallieren</string>
     <string name="score">Interpunktion</string>
     <string name="high">Hoch</string>
     <string name="intermediate">Mittelstufe</string>

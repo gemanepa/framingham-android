@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Фрамингема</string>
-    <string name="navbar_title">сердечный риск Фрамингема</string>
+    <string name="navbar_title">сердечный риск Фрамингема</string><string name="langcode">ru</string><string name="openwebversion">открыть сайт</string><string name="sendfeedback">Отправить отзыв</string><string name="rateapp">Оцените приложение</string><string name="uninstall">Удалить</string>
     <string name="action_settings">настройки</string>
     <string name="gender">жанр</string>
     <string name="man">Варон</string>

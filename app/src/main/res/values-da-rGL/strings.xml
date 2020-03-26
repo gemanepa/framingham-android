@@ -6,7 +6,7 @@
     <string name="man">Mand</string>
     <string name="woman">Kvinder</string>
     <string name="age">Alder</string>
-    <string name="navbar_title">Framingham Hjerte Risiko</string>
+    <string name="navbar_title">Framingham Hjerte Risiko</string><string name="langcode">da</string><string name="openwebversion">Åben hjemmeside</string><string name="sendfeedback">Send forslag</string><string name="rateapp">Bedøm app</string><string name="uninstall">Afinstaller</string>
     <string name="colesterol_hdl">Kolesterol HDL (mg/dl)</string>
     <string name="colesterol_ldl">Kolesterol LDL (mg/dl)</string>
     <string name="colesterol_total">Kolesterol i alt (mg/dl)</string>

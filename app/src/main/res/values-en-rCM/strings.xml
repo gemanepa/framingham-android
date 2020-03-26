@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Framingham CR</string>
-<string name="navbar_title">Framingham CardioRisk</string>
+<string name="navbar_title">Framingham CardioRisk</string><string name="langcode">en</string><string name="openwebversion">Open Web Version</string><string name="sendfeedback">Send feedback</string><string name="rateapp">Rate app</string><string name="uninstall">Uninstall</string>
     <string name="action_settings">Settings</string>
     <string name="gender">Gender</string>
     <string name="man">Man</string>
@@ -30,7 +30,7 @@
     <string name="risk">Risk</string>
     <string name="treatment">Treatment:</string>
     <string name="treatment_low_diabetes">Despite Risk Level being Low, patient requires statins treatment due to diabetes or impaired fasting glucose being present in an over 40 years old person</string><string name="patient">Patient</string>
-    <string name="patient_name">Patient\'s Name</string><string name="patient_not_requires_treatment">Patient not requires treatment.</string>
+    <string name="patient_name">Patient\'s Name</string><string name="patient_not_requires_treatment">Patient does not require treatment.</string>
     <string name="statins_only_indicated">Statins only indicated in case of:</string>
     <string name="aterosclerosis">Clinical Atherosclerosis</string>
     <string name="abdominal_aortic_aneurysm">Abdominal Aortic Aneurysm</string>

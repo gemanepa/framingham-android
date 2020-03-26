@@ -60,5 +60,5 @@
     <string name="man">Homme</string>
     <string name="gender">Genre</string>
     <string name="action_settings">réglages</string>
-    <string name="navbar_title">CardioRisque Framingham</string>
+    <string name="navbar_title">CardioRisque Framingham</string><string name="langcode">fr</string><string name="openwebversion">Ouvrir Version Web</string><string name="sendfeedback">Envoyer commentaires</string><string name="rateapp">Noter l\'application</string><string name="uninstall">Désinstaller</string>
 </resources>

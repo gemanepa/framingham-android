@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">CR Framingham</string>
-<string name="navbar_title">CardioRischio Framingham</string>
+<string name="navbar_title">CardioRischio Framingham</string><string name="langcode">it</string><string name="openwebversion">Aprire Versione Web</string><string name="sendfeedback">Inviare suggerimenti</string><string name="rateapp">Valuta l\'applicazione</string><string name="uninstall">Disinstallare</string>
     <string name="colesterol_hdl">Colesterolo HDL (mg/dl)</string>
     <string name="colesterol_ldl">Colesterolo LDL (mg/dl)</string>
     <string name="colesterol_total">Colesterolo Totale (mg/dl)</string>

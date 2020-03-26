@@ -3,8 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.gemanepa.framingham.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/menu_webitem"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/openwebversion"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_suggestionsitem"
+        android:orderInCategory="100"
+        android:title="@string/sendfeedback"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_rateitem"
+        android:orderInCategory="100"
+        android:title="@string/rateapp"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_uninstallapp"
+        android:orderInCategory="100"
+        android:title="@string/uninstall"
         app:showAsAction="never" />
 </menu>
